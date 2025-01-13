@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  mat-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #202c4b;
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  --mat-form-field-container-height: 38px !important;
+  --mat-form-field-container-vertical-padding: 9px !important;
+  --mdc-outlined-text-field-outline-color: #e9edf4;
+}

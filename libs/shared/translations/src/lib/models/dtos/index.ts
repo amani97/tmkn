@@ -1,0 +1,1 @@
+export { TranslationConfig } from './config';

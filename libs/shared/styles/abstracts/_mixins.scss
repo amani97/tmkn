@@ -1,0 +1,15 @@
+@mixin rtl-style($prop, $value, $inverse-prop, $default-value, $isNgDeep: false) {
+  #{$prop}: $value !important;
+
+  @if $isNgDeep {
+    html[dir='rtl'] :host & {
+      #{$inverse-prop}: $value !important;
+      #{$prop}: $default-value !important;
+    }
+  } @else {
+    html[dir='rtl'] & {
+      #{$inverse-prop}: $value !important;
+      #{$prop}: $default-value !important;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.navigator-container {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  tm-ui-flat-button {
+    min-width: fit-content;
+    flex: 1;
+  }
+}

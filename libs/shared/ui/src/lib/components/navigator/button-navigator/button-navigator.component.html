@@ -1,0 +1,11 @@
+<div class="navigator-container">
+  @for (item of list(); track $index) {
+    <tm-ui-flat-button
+      [title]="item.title | translate"
+      [icon]="item.icon"
+      [routerLink]="item.routerLink"
+      [color]="item.color"
+      [exactMatch]="item.exactMatch!">
+    </tm-ui-flat-button>
+  }
+</div>

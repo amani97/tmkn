@@ -1,0 +1,33 @@
+<mat-toolbar class="dashboard-header">
+  <mat-toolbar-row>
+    <div class="spacer"></div>
+    <div class="profile-wrapper">
+      <div class="img-container" [matMenuTriggerFor]="menu">
+        @if (userImgURL()) {
+        <img [src]="userImgURL()" alt="{{ firstName() + ' ' + lastName() }}" />
+        } @else {
+        <div class="initials-circle">
+          <h6 class="pt-1">{{ initials }}</h6>
+        </div>
+        }
+      </div>
+      <a routerLink="/profile" class="name-container">
+        <span class="user-welcome">{{ welcomeMessage() }}</span>
+        <span class="user-name">{{ firstName() }} {{ lastName() }}</span>
+      </a>
+      <mat-menu #menu="matMenu" class="profile-menu" yPosition="below">
+        @for (item of menuDataList(); track $index) {
+        <a
+          mat-button
+          [routerLink]="item.routeLink"
+          mat-menu-item
+          class="menu-item"
+        >
+          <i title [ngClass]="item.icon"></i>
+          {{ item.title }}
+        </a>
+        }
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

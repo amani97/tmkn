@@ -1,0 +1,30 @@
+<mat-expansion-panel
+  [expanded]="false"
+  #panel
+  (opened)="onOpened()"
+  (closed)="onClosed()"
+  class="nav-child-item"
+>
+  <mat-expansion-panel-header
+    [@.disabled]="true"
+    [ngClass]="[!expanded() ? 'not-expanded' : '', 'nav-child-item-header']"
+  >
+    <mat-panel-title [ngClass]="!expanded() ? 'not-expanded' : ''">
+      <i title mat-list-icon [ngClass]="['list-item__icon', icon()]"></i>
+      <span [hidden]="!expanded()" mat-line>{{ title() }}</span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  @for (navItem of children(); track $index) {
+  <tm-ui-nav-item
+    [expanded]="expanded()"
+    [title]="navItem.label"
+    [routeLink]="navItem.routeLink"
+    [icon]="navItem.icon"
+    [isActive]="navItem.isActive"
+    [children]="navItem.children"
+    [disabled]="disabled()"
+  >
+  </tm-ui-nav-item>
+  }
+</mat-expansion-panel>

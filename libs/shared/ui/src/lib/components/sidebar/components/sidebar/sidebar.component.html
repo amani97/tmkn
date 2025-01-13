@@ -1,0 +1,56 @@
+<mat-drawer-container class="tm-sidenav-container" autosize>
+  <mat-drawer
+    #drawer
+    [@slideInOut]="sidenavState()"
+    mode="side"
+    [opened]="true"
+  >
+    <div class="header">
+      <div class="logo">
+        <a [routerLink]="logoLink()">
+          <img
+            src="{{
+              expanded()
+                ? './assets/logo/full-logo.svg'
+                : './assets/logo/mini-logo.svg'
+            }}"
+            [class.expanded]="expanded()"
+            width="{{ expanded() ? '140' : '45' }}"
+            alt="logo"
+          />
+        </a>
+      </div>
+
+      <button mat-button class="toggle-icon" (click)="toggleSideNav()">
+        <i class="ti ti-menu-deep"></i>
+      </button>
+    </div>
+    <div class="content">
+      <mat-nav-list role="navigation">
+        @for (navItem of navigationList(); track $index) {
+        <div class="main-list">
+          <h4 class="list-title">{{ expanded() ? (navItem.title | translate) : '' }}</h4>
+          @for (menuItem of navItem.menu; track $index) {
+          <tm-ui-nav-item
+            [expanded]="expanded()"
+            [title]="menuItem.label"
+            [routeLink]="menuItem.routeLink"
+            [icon]="menuItem.icon"
+            [isActive]="menuItem.isActive"
+            [children]="menuItem.children"
+            [disabled]="menuItem.disabled"
+          >
+          </tm-ui-nav-item>
+          }
+        </div>
+        }
+      </mat-nav-list>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content class="mat-drawer-content" [@sidenavContentInOut]="sidenavState()">
+      <ng-content select=".header"></ng-content>
+      <ng-content select=".main-content"></ng-content>
+  </mat-drawer-content>
+
+</mat-drawer-container>

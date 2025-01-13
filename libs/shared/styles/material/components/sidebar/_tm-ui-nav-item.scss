@@ -1,0 +1,70 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-nav-item {
+    a.mat-mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line {
+
+      &:hover{
+        background-color: mat.get-theme-color($theme, primary, 90) !important;
+      }
+      .mdc-list-item__content {
+        .mdc-list-item__primary-text {
+          i {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+            background: #F6F8FB;
+          }
+          span {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+          }
+        }
+      }
+    }
+
+    a.mat-mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line.active {
+      background-color: mat.get-theme-color($theme, primary, 90) !important;
+
+      .mdc-list-item__content {
+        .mdc-list-item__primary-text {
+          i {
+            color: mat.get-theme-color($theme, primary) !important;
+            background: #F6F8FB;
+          }
+          span {
+            color: mat.get-theme-color($theme, primary) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  tm-ui-nav-item {
+    a.mat-mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line {
+      .mdc-list-item__content {
+        .mdc-list-item__primary-text {
+          i {
+            font-size: 16px;
+          }
+
+          span {
+            text-transform: capitalize;
+            font-size: 14px;
+            font-weight: 400;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

@@ -1,0 +1,64 @@
+// TODO: Enhance nav-child-item
+tm-ui-nav-child-item {
+  .mat-expansion-panel.nav-child-item {
+    box-shadow: none !important;
+    background: none;
+
+    .mat-expansion-panel-header.nav-child-item-header {
+      margin-bottom: 5px;
+      width: 100%;
+      border-radius: 5px;
+      padding: 8px !important;
+      height: 40px;
+
+      i {
+        border-radius: 5px;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      span:not(.mat-content) {
+        @include rtl-style(
+          margin-left,
+          10px,
+          margin-right,
+          0,
+          $isNgDeep: false
+        );
+      }
+
+      .mat-expansion-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 300ms ease;
+      }
+
+      &.mat-expanded {
+        .mat-expansion-indicator {
+          transform: rotate(-90deg) !important;
+        }
+      }
+
+      &.not-expanded {
+        .mat-expansion-indicator {
+          display: none;
+        }
+      }
+      &-title.not-expanded {
+        justify-content: center !important;
+        margin: 0 !important;
+      }
+    }
+
+    .mat-expansion-panel-body {
+      padding: 8px 8px 8px 40px !important;
+    }
+
+    mat-list-item {
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '@angular/material' as mat;
+
+@mixin color($theme, $variants) {
+  .mat-mdc-unelevated-button[tm-flat-button] {
+    &.mat-primary {
+      background-color: mat.get-theme-color($theme, primary, 90);
+      border-color: mat.get-theme-color($theme, primary, 40);
+      color: mat.get-theme-color($theme, primary);
+
+      .flat-button-icon {
+        background-color: mat.get-theme-color($theme, primary, 40);
+        color: white;
+      }
+    }
+
+    &.mat-accent {
+      background-color: mat.get-theme-color($theme, tertiary, 90);
+      border-color: mat.get-theme-color($theme, tertiary, 40);
+      color: mat.get-theme-color($theme, tertiary, 35);
+
+      .flat-button-icon {
+        background-color: mat.get-theme-color($theme, tertiary, 40);
+        color: white;
+      }
+    }
+
+    &.mat-warn {
+      background-color: mat.get-theme-color($theme, error, 80);
+      border-color: mat.get-theme-color($theme, error, 40);
+      color: mat.get-theme-color($theme, error);
+
+      .flat-button-icon {
+        background-color: mat.get-theme-color($theme, error, 40);
+        color: white;
+      }
+    }
+
+    &.mat-yellow {
+      background-color: map.get($variants, yellow, 80);
+      border-color: map.get($variants, yellow, 40);
+      color: map.get($variants, yellow, 25);
+
+      .flat-button-icon {
+        background-color: map.get($variants, yellow, 40);
+        color: white;
+      }
+    }
+
+    &.mat-purple {
+      background-color: map.get($variants, purple, 70);
+      border-color: map.get($variants, purple, 40);
+      color: map.get($variants, purple, 40);
+
+      .flat-button-icon {
+        background-color: map.get($variants, purple, 40);
+        color: white;
+      }
+    }
+
+    &.active {
+      border: 2px solid !important;
+    }
+  }
+
+  .mat-mdc-outlined-button {
+    &.mat-primary {
+      border-color: mat.get-theme-color($theme, primary) !important;
+    }
+
+    &.mat-accent {
+      border-color: mat.get-theme-color($theme, tertiary) !important;
+    }
+
+    &.mat-warn {
+      border-color: mat.get-theme-color($theme, error) !important;
+    }
+  }
+}
+
+@mixin theme($theme, $variants) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme, $variants);
+  }
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.button-overrides((
+    filled-container-shape: 5px,
+    outlined-container-shape: 5px,
+    outlined-horizontal-padding: 13.6px
+  ));
+}

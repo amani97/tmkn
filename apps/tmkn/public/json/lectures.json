@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Lecture 1",
+    "description": "Description 1",
+    "price": 100,
+    "active": true,
+    "availableForSale": true,
+    "goldenLecture": false
+  },
+  {
+    "id": 2,
+    "title": "Lecture 2",
+    "description": "Description 2",
+    "price": 300,
+    "active": false,
+    "availableForSale": true,
+    "goldenLecture": false
+  }
+]

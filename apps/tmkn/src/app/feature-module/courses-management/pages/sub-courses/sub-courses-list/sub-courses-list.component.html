@@ -1,0 +1,78 @@
+<tm-ui-section
+  [icon]="'ti ti-book'"
+  [title]="'courses.sub-courses-and-services' | translate"
+>
+  <ng-container class="card-content-container">
+    <div class="row">
+      <div class="col-lg-2 offset-lg-10 mb-3 d-flex justify-content-end">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle btn-w-lg"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="ti ti-square-rounded-plus me-2"></i>
+            Add New
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="openSubCourseDialog()">Sub Course</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="openServiceDialog()">Service</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="openPaperNoteDialog()">Paper note</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <tm-ui-tree-table
+          [metaData]="subCoursesMetaData"
+          [metaDataLevelTwo]="lectureMetaData"
+          [metaDataLevelThree]="mediaContentData"
+          [data]="subCourses$"
+          [fetchChildData]="fetchChildData"
+          [pagination]="pagination$"
+          [showSort]="true"
+          [showPagination]="true"
+          [loading]="loading$ | async"
+          [emptyDataMessage]="'No Data Found'"
+          [showAddButton]="true"
+          [addButtonTitle]="'Add new'"
+          [addButtonLink]="'./'"
+        >
+          <ng-container class="filter-actions">
+            <div class="d-flex gap-3">
+              <mat-form-field>
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start date" />
+                  <input matEndDate placeholder="End date" />
+                </mat-date-range-input>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+
+              <button
+                class="filter-btn"
+                mat-stroked-button
+                [matMenuTriggerFor]="menu"
+              >
+                <i class="ti ti-filter me-2"></i> Filter
+              </button>
+              <mat-menu #menu="matMenu" class="filter-menu"> </mat-menu>
+            </div>
+          </ng-container>
+        </tm-ui-tree-table>
+      </div>
+    </div>
+  </ng-container>
+</tm-ui-section>

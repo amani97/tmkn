@@ -1,0 +1,35 @@
+.filter-btn::after {
+  display: inline-block;
+  margin-inline-start: 0.5rem;
+  vertical-align: 0;
+  content: '\f078';
+  font-family: 'Font Awesome 5 Free';
+  border: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+::ng-deep .filter-menu {
+  width: 350px;
+  background-color: #fff;
+
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 16px;
+
+    .filter-field {
+      flex: 1;
+    }
+  }
+
+  .filter-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

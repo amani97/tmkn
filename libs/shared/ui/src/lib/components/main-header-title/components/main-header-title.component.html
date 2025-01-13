@@ -1,0 +1,29 @@
+<div class="main-header-container">
+  <div class="start-side">
+    @if (showPrevButton()) {
+    <button
+      mat-flat-button
+      color="primary"
+      class="prev-btn"
+      (click)="onClickPrevButton()"
+    >
+      <div class="prev-btn-container">
+        {{ prevButtonTitle() }}
+      </div>
+    </button>
+    }
+    <div class="titles-container">
+      <h1 class="mat-h1">{{ mainTitle() }}</h1>
+      <h3 class="breadcrumb">
+        <a *ngFor="let breadcrumb of breadcrumbs" [routerLink]="breadcrumb.url">
+          {{ breadcrumb.label }}
+        </a>
+      </h3>
+    </div>
+  </div>
+  <div class="end-side">
+    <!-- Here you can use  [.actions-container] selector class to add your custom actions -->
+    <ng-content select=".actions-container"></ng-content>
+    <!-- Here you can use  [.actions-container] selector class to add your custom actions -->
+  </div>
+</div>

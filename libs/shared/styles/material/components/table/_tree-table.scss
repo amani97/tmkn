@@ -1,0 +1,78 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-tree-table {
+    .mat-mdc-table {
+      background: none !important;
+
+      thead tr {
+        // background-color: mat.get-theme-color($theme, secondary, 80) !important;
+        background-color: #F2F4F8 !important;
+        th {
+          color: mat.get-theme-color($theme, primary, 20) !important;
+          border: 0px solid #fff;
+        }
+      }
+
+      tbody tr {
+        background-color: #fff;
+
+        td {
+          color: mat.get-theme-color($theme, secondary, 35) !important;
+          border: 1px solid mat.get-theme-color($theme, secondary, 90) !important;
+          border-left: 0 !important;
+          border-right: 0 !important;
+
+          .list-item__action {
+            border: 1px solid mat.get-theme-color($theme, secondary, 90) !important;
+            border-radius: 100%;
+            background: transparent;
+            box-shadow: unset;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  tm-ui-tree-table {
+    .mat-mdc-table {
+      text-align: center;
+
+      thead tr {
+        th {
+          font-weight: 700;
+          text-align: center;
+        }
+      }
+
+      tbody tr {
+        td {
+          text-align: center !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}
+
+.mat-mdc-menu-content {
+  padding: 1rem !important;
+  background-color: #fff !important;
+
+  .action-item {
+    color: #202c4b !important;
+    padding: 0.594rem 0.9375rem;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,14 @@
+@if (title()) {
+<a
+  mat-flat-button
+  tm-flat-button
+  routerLinkActive="active"
+  queryParamsHandling="merge"
+  [routerLinkActiveOptions]="{ exact: exactMatch() }"
+  [routerLink]="routerLink()"
+  [color]="color()"
+>
+  <i [ngClass]="[icon()]" class="flat-button-icon"></i>
+  <h4>{{ title() }}</h4>
+</a>
+}

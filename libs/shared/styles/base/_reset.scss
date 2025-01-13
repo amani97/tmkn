@@ -1,0 +1,21 @@
+a {
+  &.mat-mdc-button,
+  &.mat-raised-button,
+  &.mat-fab,
+  &.mat-mini-fab,
+  &.mat-list-item {
+    &:hover {
+      color: currentColor;
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+  padding: 0;
+}

@@ -1,0 +1,53 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  mat-icon {
+    &.tm-primary {
+      path {
+        fill: mat.get-theme-color($theme, primary) !important;
+      }
+    }
+
+    &.tm-accent {
+      path {
+        fill: mat.get-theme-color($theme, tertiary) !important;
+      }
+    }
+
+    &.tm-warn {
+      path {
+        fill: mat.get-theme-color($theme, error) !important;
+      }
+    }
+
+    &.tm-gray {
+      path {
+        fill: #757d8a !important;
+      }
+    }
+
+    &.tm-white {
+      path {
+        fill: white !important;
+      }
+    }
+
+    &.tm-purple {
+      path {
+        fill: #7c04f9 !important;
+      }
+    }
+
+    &.tm-yellow {
+      path {
+        fill: #ffd233 !important;
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}

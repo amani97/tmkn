@@ -1,0 +1,17 @@
+export const enum AuthRoute {
+	Main = 'auth',
+	DefaultLoginRedirectPath = '/',
+	Login = 'login',
+	LoginCallback = 'login-callback',
+	SilentLoginCallback = 'silent-login-callback',
+	LoginFailed = 'login-failed',
+	Profile = 'profile',
+	Register = 'register',
+	CompleteLogin = 'complete-login',
+	LogoutCallback = 'logout-callback',
+	Logout = 'logout',
+	LoggedOut = 'logged-out',
+	ResetPassword = 'reset-password',
+	ForgetPassword = 'forget-password',
+	ConfirmEmail = 'confirm-email',
+}

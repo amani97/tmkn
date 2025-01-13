@@ -1,0 +1,99 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+$chip-remove-font-size: 18px;
+
+@mixin _element-color($foreground, $background) {
+  padding: 7px 15px;
+  border-radius: 20px;
+  background-color: $background;
+  color: $foreground;
+
+  .mat-chip-remove {
+    color: $foreground;
+    opacity: 0.4;
+  }
+}
+
+@mixin _palette-styles($theme, $palette) {
+  @include _element-color(
+    mat.get-theme-color($theme, $palette, 100),
+    mat.get-theme-color($theme, $palette, 40)
+  );
+}
+
+@mixin color($theme) {
+  .tm-value-container.tm-bold {
+    font-weight: bold;
+  }
+
+  .tm-value-container.tm-status {
+    @include _element-color(
+      mat.get-theme-color($theme, primary, 100),
+      mat.get-theme-color($theme, primary, 50)
+    );
+
+    &::after {
+      background: mat.get-theme-color($theme, primary);
+    }
+  }
+
+  .tm-value-container {
+    &.tm-primary {
+      @include _palette-styles($theme, primary);
+    }
+
+    &.tm-warn {
+      @include _palette-styles($theme, error);
+    }
+
+    &.tm-accent {
+      @include _palette-styles($theme, tertiary);
+    }
+
+    &.tm-red {
+      background-color: rgba(232, 38, 70, 0.1);
+      color: #E82646;
+      &::before{
+        background-color: #E82646;
+      }
+    }
+
+    &.tm-green {
+      background-color: rgba(26, 190, 23, 0.1);
+      color: #1ABE17;
+      &::before{
+        background-color: #1ABE17;
+      }
+    }
+
+    &.tm-yellow {
+      background-color: #f4f495;
+      color: #e8e826;
+      &::before{
+        background-color: #e8e826;
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  .tm-value-container {
+    font: mat.get-theme-typography($theme, body-medium, font);
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}
+
+tm-ui-value-container{
+  display: flex;
+  justify-content: center;
+}

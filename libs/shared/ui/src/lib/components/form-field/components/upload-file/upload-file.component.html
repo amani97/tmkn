@@ -1,0 +1,29 @@
+<div class="custom-file-container" data-upload-id="myFirstImage">
+  <label for="uploadImage">
+    {{ label() }}
+  </label>
+
+  <ngx-dropzone
+    id="uploadImage"
+    (change)="onSingleSelect($event)"
+    class="service-upload"
+    [multiple]="false"
+  >
+    <ngx-dropzone-label class="drop-browse align-center">
+      <!-- <span><img src="assets/img/icons/drop-icon.svg" alt="upload" /></span> -->
+      <div class="d-flex">
+        Drop your files here or<span class="text-primary ms-1">browse</span>
+      </div>
+      <span class="text-muted">Maximum size: 50MB</span>
+    </ngx-dropzone-label>
+    @for (f of singleFile; track f) {
+    <ngx-dropzone-image-preview
+      ngProjectAs="ngx-dropzone-preview"
+      [file]="f"
+      [removable]="true"
+      (removed)="onRemoveSingle(f)"
+    >
+    </ngx-dropzone-image-preview>
+    }
+  </ngx-dropzone>
+</div>

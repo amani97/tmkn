@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-sidebar {
+    .tm-sidenav-container{
+      .tooltip {
+        background-color: mat.get-theme-color($theme, primary);
+      }
+
+      .toggle-icon {
+        border: 1px solid rgba(mat.get-theme-color($theme, tertiary-container), 0.8) !important;
+        background-color: transparent;
+      }
+
+      mat-drawer-content {
+        .main-content{
+
+          /* Track */
+          &::-webkit-scrollbar-track {
+            background: mat.get-theme-color($theme, primary, 90);
+          }
+
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            background: mat.get-theme-color($theme, primary);
+          }
+
+          /* Handle on hover */
+          &::-webkit-scrollbar-thumb:hover {
+            background: mat.get-theme-color($theme, primary, 70);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}

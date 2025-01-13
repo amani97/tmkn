@@ -1,0 +1,128 @@
+{
+  "name": "tmkn",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/tmkn/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/tmkn",
+        "index": "apps/tmkn/src/index.html",
+        "browser": "apps/tmkn/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "apps/tmkn/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/tmkn/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared/assets/src/lib/",
+            "output": "./assets"
+          }
+        ],
+        "styles": [
+          "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+          "libs/shared/assets/src/lib/icons/fontawesome/css/all.min.css",
+          "libs/shared/assets/src/lib/icons/fontawesome/css/fontawesome.min.css",
+          "libs/shared/assets/src/lib/icons/tabler-icons/tabler-icons.css",
+          "libs/shared/assets/src/lib/icons/feather/css/iconfont.css",
+          "libs/shared/assets/src/lib/icons/ionic/ionicons.css",
+          "libs/shared/assets/src/lib/icons/pe7/pe-icon-7.css",
+          "libs/shared/assets/src/lib/icons/material/materialdesignicons.css",
+          "libs/shared/assets/src/lib/icons/simpleline/simple-line-icons.css",
+          "libs/shared/assets/src/lib/icons/themify/themify.css",
+          "libs/shared/assets/src/lib/icons/typicons/typicons.css",
+          "libs/shared/assets/src/lib/icons/weather/weathericons.css",
+          "libs/shared/assets/src/lib/icons/boxicons/css/boxicons.min.css",
+          "libs/shared/assets/src/lib/icons/flags/flags.css",
+          "node_modules/ngx-lightbox/lightbox.css",
+          "node_modules/bootstrap/scss/bootstrap.scss",
+          "libs/shared/assets/src/lib/material/material.scss",
+          "libs/shared/styles/main.scss",
+          "libs/shared/assets/src/lib/scss/main.scss",
+          "apps/tmkn/src/styles.scss"
+        ],
+        "scripts": [ "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/tmkn/src/environments/environment.ts",
+              "with": "apps/tmkn/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "tmkn:build:production"
+        },
+        "development": {
+          "buildTarget": "tmkn:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "tmkn:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/tmkn/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "tmkn:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/tmkn/browser",
+        "spa": true
+      }
+    }
+  }
+}

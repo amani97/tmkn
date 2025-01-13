@@ -1,0 +1,47 @@
+/* ! Importing Directories */
+@import 'abstracts/abstracts-dir';
+@import 'helpers/helpers-dir';
+@import 'vendors/vendors-dir';
+@import 'base/base-dir';
+@import 'layout/layout-dir';
+@import 'pages/pages-dir';
+@import 'components/components-dir';
+@import 'material/themes-dir';
+
+/* Importing Directories */
+
+/*********************************************************
+        The Arrangement of Imports Should be Exactly Like That
+        [[abstracts]] - [[vendors]] - [[base]] - [[layout]]
+        [[components]] - [[pages]] - [[themes]]
+
+        To Learn More Please Visit This Articles:
+        https://www.learnhowtoprogram.com/user-interfaces/building-layouts-preprocessors/7-1-sass-architecture
+        https://medium.com/swlh/how-to-structure-scss-in-an-angular-app-a1b8a759a028
+*********************************************************/
+
+@keyframes inwards-open {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes inwards-close {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.openAnimate {
+  animation: inwards-open 1000ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.closeAnimate {
+  animation: inwards-close 1000ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}

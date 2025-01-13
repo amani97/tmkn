@@ -1,0 +1,46 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-base-dialog {
+    .top-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e9edf4;
+
+      .title {
+        color: #202C4B;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .mat-mdc-outlined-button:not([mat-ripple-loader-disabled])[color='primary'] {
+    border-color: mat.get-theme-color($theme, primary);
+  }
+  .mat-mdc-outlined-button:not([mat-ripple-loader-disabled])[color='warn'] {
+    border-color: mat.get-theme-color($theme, primary);
+  }
+  .mat-mdc-outlined-button:not([mat-ripple-loader-disabled])[color='gray'] {
+    border-color: mat.get-theme-color($theme, surface-container-low);
+  }
+  .mat-mdc-dialog-container {
+    .mdc-dialog__content.dialog-main-content {
+      color: var(--mat-sidenav-content-text-color);
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.dialog-overrides(
+    (
+      container-color: #ffffff,
+    )
+  );
+}

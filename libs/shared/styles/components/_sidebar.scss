@@ -1,0 +1,106 @@
+tm-ui-sidebar {
+  .tm-sidenav-container {
+    height: 100%;
+
+    mat-drawer {
+      display: flex;
+      background-color: #fff;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      @include rtl-style(left, 0, right, unset);
+      width: 250px;
+      overflow-x: hidden;
+      z-index: 1000;
+      transition: all 300ms cubic-bezier(1, -0.4, 0.08, 1.34);
+      border-radius: 0;
+      @include rtl-style(border-right, 1px solid #e9edf4, border-left, unset);
+
+      .header {
+        position: relative;
+        padding: 0 15px;
+        .logo {
+          transition: all 800ms ease-in;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding-top: 20px;
+          a img {
+            width: 45;
+          }
+          a img .expanded {
+            width: 100 !important;
+          }
+        }
+
+        .toggle-icon {
+          position: absolute;
+          @include rtl-style(right, 5px, left, unset);
+          top: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          font-size: 30px;
+          border-radius: 5px;
+        }
+      }
+
+      .content {
+        padding: 15px;
+
+        .main-list {
+          margin-bottom: 5px;
+
+          .list-title {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin-bottom: 14px !important;
+
+            &::after {
+              content: '';
+              width: 100%;
+              height: 1px;
+              background: #e9edf4;
+              @include rtl-style(margin-left, 8px, margin-right, unset);
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
+    mat-drawer-content {
+      overflow: hidden;
+
+      .main-content{
+        overflow: auto;
+        height: 100%;
+
+        &::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          border-radius: 5px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    font-size: medium;
+    padding: 5px;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+  }
+}

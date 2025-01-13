@@ -1,0 +1,609 @@
+<tm-ui-base-dialog
+  headerIcon="ti ti-help-hexagon"
+  [headerTitle]="'Quiz Form'"
+  [showActions]="true"
+  [submitTitle]="'Publish'"
+  [discardTitle]="'Cancel'"
+  (submitAction)="submitNewQuestion()"
+>
+  <ng-container class="main-dialog-content">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="question-list-container">
+          <div class="absolute-wrapper">
+            <div class="header-question-list fixed-wrapper">
+              <div class="header-question">
+                <h2>Questions</h2>
+                <div class="actions d-flex gap-2">
+                  <button (click)="selectedType = null" class="btn-add-circle">
+                    <i class="ti ti-home"></i>
+                  </button>
+                  <button
+                    (click)="$event.stopPropagation()"
+                    [matMenuTriggerFor]="menu"
+                    class="btn-add-circle"
+                  >
+                    <i class="ti ti-plus"></i>
+                  </button>
+                </div>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    (click)="addQuestion(QuestionType.MultipleChoice)"
+                    class="action-item"
+                  >
+                    <i mat-list-icon class="me-2 ti ti-circle-check"></i>
+                    <span>Multiple choice</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="addQuestion(QuestionType.MultipleSelection)"
+                    class="action-item"
+                  >
+                    <i mat-list-icon class="me-2 ti ti-square-check"></i>
+                    <span>Multiple selection</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="addQuestion(QuestionType.YesOrNoQuestion)"
+                    class="action-item"
+                  >
+                    <i mat-list-icon class="me-2 ti ti-progress-help"></i>
+                    <span>Yes or no Question</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+            <div class="fixed-wrapper scrollable">
+              <form [formGroup]="form">
+                <mat-selection-list
+                  #shoesList
+                  [formControl]="itemsControl"
+                  name="shoes"
+                  [multiple]="false"
+                  cdkDropList
+                  (cdkDropListDropped)="drop($event)"
+                  (selectionChange)="onSelectionChange($event)"
+                >
+                  @for (item of (questionsList$| async); track $index; let i =
+                  $index) {
+                  <mat-list-option [value]="item" cdkDrag class="question-item">
+                    <div class="d-flex justify-content-between">
+                      <span class="question-que">
+                        <span class="ques-index">{{ i + 1 }}.</span>
+                        {{ item.question }}
+                      </span>
+                      <i class="ti ti-menu-2 pr-3"></i>
+                    </div>
+                  </mat-list-option>
+                  }
+                </mat-selection-list>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-6 col-sm-12">
+        @switch (selectedType) { @case (QuestionType.MultipleChoice) {
+        <div class="d-flex justify-content-between">
+          <h1 class="mb-5">
+            Question
+            {{
+              selectedQuestionIndex
+                ? selectedQuestionIndex
+                : questionsList.length + 1
+            }}
+            - Multiple Choice
+          </h1>
+
+          <button
+            (click)="deleteQuestion(selectedQuestionIndex)"
+            class="delete-btn bg-danger"
+          >
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>
+        <form class="row" [formGroup]="questionsFg">
+          <div class="col-lg-12">
+            <mat-label>Question</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="question"
+                placeholder="Write question body"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-radio-group (change)="onChangeIsCorrect($event)">
+            <ng-container formArrayName="answers">
+              <ng-container
+                *ngFor="
+                  let availabilityForm of answers?.controls;
+                  let i = index
+                "
+              >
+                <ng-container [formGroupName]="i">
+                  <div class="col-lg-12">
+                    <mat-label class="answer-label"
+                      >Answer ({{ i + 1 }})
+                      <span
+                        *ngIf="!!answers.controls[i].get('isCorrect')?.value"
+                        [ngClass]="
+                          !!answers.controls[i].get('isCorrect')?.value
+                            ? 'is-correct bg-success-transparent p-1 rounded'
+                            : ''
+                        "
+                      >
+                        Is Correct</span
+                      ></mat-label
+                    >
+                    <div class="input-radio">
+                      <mat-radio-button [value]="i"></mat-radio-button>
+                      <mat-form-field class="w-100">
+                        <input
+                          matInput
+                          formControlName="answer"
+                          placeholder="Add an answer"
+                        />
+                        <mat-error tmUiFormErrorMessages></mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="w-100">
+                        <input
+                          matInput
+                          formControlName="answerAr"
+                          placeholder="Add an answer (Arabic)"
+                        />
+                        <mat-error tmUiFormErrorMessages></mat-error>
+                      </mat-form-field>
+                      <button
+                        (click)="
+                          $event.stopPropagation(); onDeleteAnswerClicked(i)
+                        "
+                        [matMenuTriggerFor]="menu"
+                        class="btn-remove-circle"
+                      >
+                        <i class="ti ti-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </mat-radio-group>
+
+          <div class="col-lg-12 mb-4 d-flex justify-content-end px-5">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onAddAnswerClicked()"
+              [disabled]="disableAddAnswer"
+            >
+              <i class="ti ti-square-rounded-plus me-2"></i>
+              Add Answer
+            </button>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Explanation</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanation"
+                placeholder="Write question explanation"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Explanation (Arabic)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanationAr"
+                placeholder="Write question explanation (Arabic)"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12">
+            <mat-label>External URL</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="externalURL"
+                placeholder="Add external URL linked to question"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12 mb-4">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="saveQuestion()"
+            >
+              Save Question
+            </button>
+          </div>
+        </form>
+        } @case(QuestionType.MultipleSelection){
+        <div class="d-flex justify-content-between">
+          <h1 class="mb-5">
+            Question
+            {{
+              selectedQuestionIndex
+                ? selectedQuestionIndex
+                : questionsList.length + 1
+            }}
+            - Multiple Selection
+          </h1>
+
+          <button
+            (click)="deleteQuestion(selectedQuestionIndex)"
+            class="delete-btn bg-danger"
+          >
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>
+        <form class="row" [formGroup]="questionsFg" *ngIf="questionsFg">
+          <div class="col-lg-12">
+            <mat-label>Question</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="question"
+                placeholder="Write question body"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <ng-container formArrayName="answers">
+            <ng-container
+              *ngFor="let availabilityForm of answers?.controls; let i = index"
+            >
+              <ng-container [formGroupName]="i">
+                <div class="col-lg-12">
+                  <mat-label class="answer-label"
+                    >Answer ({{ i + 1 }})
+                    <span
+                      *ngIf="!!answers.controls[i].get('isCorrect')?.value"
+                      [ngClass]="
+                        !!answers.controls[i].get('isCorrect')?.value
+                          ? 'is-correct bg-success-transparent p-1 rounded'
+                          : ''
+                      "
+                    >
+                      Is Correct</span
+                    ></mat-label
+                  >
+                  <div class="input-radio">
+                    <mat-checkbox formControlName="isCorrect"></mat-checkbox>
+                    <mat-form-field class="w-100">
+                      <input
+                        matInput
+                        formControlName="answer"
+                        placeholder="Add an answer"
+                      />
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                      <input
+                        matInput
+                        formControlName="answerAr"
+                        placeholder="Add an answer (Arabic)"
+                      />
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                    <button
+                      (click)="
+                        $event.stopPropagation(); onDeleteAnswerClicked(i)
+                      "
+                      [matMenuTriggerFor]="menu"
+                      class="btn-remove-circle"
+                    >
+                      <i class="ti ti-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <div class="col-lg-12 mb-4 d-flex justify-content-end px-5">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onAddAnswerClicked()"
+              [disabled]="disableAddAnswer"
+            >
+              <i class="ti ti-square-rounded-plus me-2"></i>
+              Add Answer
+            </button>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Explanation</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanation"
+                placeholder="Write question explanation"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Explanation (Arabic)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanationAr"
+                placeholder="Write question explanation (Arabic)"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12">
+            <mat-label>External URL</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="externalURL"
+                placeholder="Add external URL linked to question"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12 mb-4">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="saveQuestion()"
+            >
+              Save Question
+            </button>
+          </div>
+        </form>
+        } @case(QuestionType.YesOrNoQuestion){
+        <div class="d-flex justify-content-between">
+          <h1 class="mb-5">
+            Question
+            {{
+              selectedQuestionIndex
+                ? selectedQuestionIndex
+                : questionsList.length + 1
+            }}
+            - Yes or no Question
+          </h1>
+
+          <button
+            (click)="deleteQuestion(selectedQuestionIndex)"
+            class="delete-btn bg-danger"
+          >
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>
+        <form class="row" [formGroup]="questionsFg">
+          <div class="col-lg-12">
+            <mat-label>Question</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="question"
+                placeholder="Write question body"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-radio-group (change)="onChangeIsCorrect($event)">
+            <ng-container formArrayName="answers">
+              <ng-container
+                *ngFor="
+                  let availabilityForm of answers?.controls;
+                  let i = index
+                "
+              >
+                <ng-container [formGroupName]="i">
+                  <div class="col-lg-12">
+                    <mat-label class="answer-label"
+                      >Answer ({{ i + 1 }})
+                      <span
+                        *ngIf="!!answers.controls[i].get('isCorrect')?.value"
+                        [ngClass]="
+                          !!answers.controls[i].get('isCorrect')?.value
+                            ? 'is-correct bg-success-transparent p-1 rounded'
+                            : ''
+                        "
+                      >
+                        Is Correct</span
+                      ></mat-label
+                    >
+                    <div class="input-radio">
+                      <mat-radio-button [value]="i"></mat-radio-button>
+                      <mat-form-field class="w-100">
+                        <input
+                          matInput
+                          formControlName="answer"
+                          placeholder="Add an answer"
+                        />
+                        <mat-error tmUiFormErrorMessages></mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="w-100">
+                        <input
+                          matInput
+                          formControlName="answerAr"
+                          placeholder="Add an answer (Arabic)"
+                        />
+                        <mat-error tmUiFormErrorMessages></mat-error>
+                      </mat-form-field>
+                      <button
+                        (click)="
+                          $event.stopPropagation(); onDeleteAnswerClicked(i)
+                        "
+                        [matMenuTriggerFor]="menu"
+                        class="btn-remove-circle"
+                      >
+                        <i class="ti ti-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </mat-radio-group>
+
+          <div class="col-lg-6 col-lg-12">
+            <mat-label>Explanation</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanation"
+                placeholder="Write question explanation"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Explanation (Arabic)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="explanationAr"
+                placeholder="Write question explanation (Arabic)"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12">
+            <mat-label>External URL</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="externalURL"
+                placeholder="Add external URL linked to question"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-12 mb-4">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="saveQuestion()"
+            >
+              Save Question
+            </button>
+          </div>
+        </form>
+        } @default {
+        <h1 class="mb-5">Plan practice test</h1>
+
+        <form class="row" *ngIf="quizFg" [formGroup]="quizFg">
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Title</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="title"
+                placeholder="Final preparation exam 02"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Title (Arabic)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="titleAr"
+                placeholder="امتحان التحضير النهائي 02"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Description</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="description"
+                placeholder="Describe this practice test to learners"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <mat-label>Description (Arabic)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="descriptionAr"
+                placeholder="وصف هذا الاختبار العملي للمتعلمين"
+              />
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <mat-label>Duration (minutes)</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                formControlName="duration"
+                type="number"
+                placeholder="0"
+              />
+              <span matTextSuffix>min</span>
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <mat-label>Minimum passing scores</mat-label>
+            <mat-form-field class="w-100">
+              <input
+                matInput
+                type="number"
+                formControlName="minimumPassingScores"
+                placeholder="0"
+              />
+              <span matTextSuffix>%</span>
+              <mat-error tmUiFormErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="flexSwitchCheckDefault">
+                Randomize Question & answer order
+              </label>
+              <input
+                formControlName="isRandomize"
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+              />
+            </div>
+          </div>
+        </form>
+        } }
+      </div>
+    </div>
+  </ng-container>
+</tm-ui-base-dialog>

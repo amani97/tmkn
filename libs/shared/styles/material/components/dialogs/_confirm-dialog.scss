@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-confirm-dialog {
+    .top-header {
+      background: mat.get-theme-color($theme, inverse-primary);
+
+      &[tm-confirmation-submit] {
+        background: mat.get-theme-color($theme, inverse-primary);
+      }
+      &[tm-confirmation-delete] {
+        background: mat.get-theme-color($theme, error);
+
+        .title {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}

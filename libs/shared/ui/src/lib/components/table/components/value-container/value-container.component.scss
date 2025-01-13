@@ -1,0 +1,28 @@
+.tm-highlighted {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tm-highlighted::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+}
+
+.tm-highlighted {
+  padding: 0.25rem 0.45rem;
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  width: max-content;
+  font-size: 10.5px;
+}
+
+.tm-link {
+  color: #1f42cc !important;
+  text-decoration: none;
+}

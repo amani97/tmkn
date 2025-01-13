@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../variables/palettes' as var;
+@use '../../abstracts/variables' as var2;
+@use '../typography/config' as typography;
+
+$_rest: (
+  secondary: map.get(var.$palettes, secondary),
+  neutral: map.get(var.$palettes, neutral),
+  neutral-variant: map.get(var.$palettes, neutral-variant),
+  error: map.get(var.$palettes, error),
+);
+$_primary: map.merge(map.get(var.$palettes, primary), $_rest);
+$_tertiary: map.merge(map.get(var.$palettes, tertiary), $_rest);
+
+$tm-light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: $_primary,
+      tertiary: $_tertiary,
+    ),
+    typography: (
+      plain-family: "'Roboto', sans-serif",
+      brand-family: "'Roboto', sans-serif",
+      bold-weight: 700,
+      medium-weight: 500,
+      regular-weight: 300,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+// ! For Define Another Color on Material Components
+// $tm-light-primary: mat.m2-define-palette(var2.$tmkn-primary);
+// $tm-light-accent: mat.m2-define-palette(var2.$tmkn-accent);
+// $tm-light-warn: mat.m2-define-palette(var2.$tmkn-warn);
+// $tm-light-success: mat.m2-define-palette(mat.$m2-green-palette);
+// $tm-light-info: mat.m2-define-palette(mat.$m2-blue-palette);
+// $tm-light-yellow: mat.m2-define-palette(var2.$tmkn-yellow);
+// $tm-light-purple: mat.m2-define-palette(var2.$tmkn-purple);
+
+$tm-light-variants: (
+  yellow: var.$tm-yellow,
+  purple: var.$tm-purple
+);

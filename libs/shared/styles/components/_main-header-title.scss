@@ -1,0 +1,26 @@
+tm-ui-main-header-title {
+  .main-header-container {
+    .start-side {
+      .titles-container{
+        .breadcrumb {
+          line-height: 30px;
+
+          a {
+            text-transform: capitalize;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .prev-btn {
+        @include rtl-style(
+          margin-right,
+          10px,
+          margin-left,
+          0,
+          $isNgDeep: false
+        );
+      }
+    }
+  }
+}

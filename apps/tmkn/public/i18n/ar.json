@@ -1,0 +1,116 @@
+{
+  "general": {
+    "back": "عودة"
+  },
+  "breadcrumb": {
+    "dashboard": "لوحة القيادة",
+    "courses": "الكورسات",
+    "courses-management":"إدارة الكورسات",
+    "courses-list": "قائمة الكورسات",
+    "courses-details": "تفاصيل الكورس",
+    "courses-form": "نموذج الكورس"
+  },
+  "navigation": {
+    "main-section": {
+      "title": "الرئيسية",
+      "courses": "الكورسات"
+    },
+    "users": {
+      "title": "المستخدمين",
+      "students": "الطلاب",
+      "teachers": "المدرسين"
+    }
+  },
+  "brief-course-details": {
+    "title": "تفاصيل الكورس",
+    "name":"العنوان",
+    "secondLevel":"المستوى الثاني",
+    "teacher":"المدرس",
+    "class":"الصف",
+    "active":"فعال",
+    "accepted":"مقبول",
+    "showHomePage":"عرض في الصفحة الرئيسية"
+  },
+  "courses": {
+    "title": "الكورسات",
+    "list": "قائمة الكورسات",
+    "courses-management":"إدارة الكورسات",
+    "sub-courses":"الكورسات الفرعية",
+    "sub-courses-and-services": "الكورسات الفرعية والخدمات",
+    "services":"الخدمات",
+    "lectures":"المحاضرات",
+    "paper-notes":"المذكرات الورقية",
+    "selected-course":"الكورس المختار",
+    "add-course": "إضافة كورس",
+    "form": "إدخال كورس",
+    "new-course": "كورس جديد",
+    "arabic": "عربي",
+    "english": "إنكليزي",
+    "form-keys": {
+      "title": "عنوان",
+      "title-hint": "أدخل عنوان الكورس",
+      "title-placeholder": "أدخل اسم الكورس",
+      "description": "الوصف",
+      "description-hint": "أدخل الوصف",
+      "description-placeholder": "أدخل الوصف",
+      "firstLevel": "المستوى الأول",
+      "firstLevel-hint": "اختر المستوى الأول",
+      "firstLevel-placeholder": "اختر المستوى الأول",
+      "secondLevel": "المستوى الثاني",
+      "secondLevel-hint": "اختر المستوى الثاني",
+      "secondLevel-placeholder": "اختر المستوى الثاني",
+      "thirdLevel": "المستوى الثالث",
+      "thirdLevel-hint": "اختر المستوى الثالث",
+      "thirdLevel-placeholder": "اختر المستوى الثالث",
+      "teacher": "المدرس",
+      "teacher-hint": "اختر المدرس",
+      "teacher-placeholder": "اختر المدرس",
+      "class": "الصف",
+      "class-hint": "اختر الصف",
+      "class-placeholder": "اختر الصف",
+      "whatsappGroupLink": "رابط مجموعة الواتس أب",
+      "whatsappGroupLink-hint": "أدخل رابط مجموعة الواتس أب",
+      "whatsappGroupLink-placeholder": "اكتب رابط مجموعة الواتس أب",
+      "price":"السعر",
+      "price-hint": "حدد سعر الكورس",
+      "price-placeholder": "سعر الكورس",
+      "price-after-discount":"السعر بعد الخصم",
+      "price-after-discount-hint": "حدد السعر بعد الخصم",
+      "price-after-discount-placeholder": "السعر بعد الخصم",
+      "active":"فعال",
+      "showAtHomePage": "عرض على الصفحة الرئيسية",
+      "showAtStoreNotes":"عرض في متجر المذكرات",
+      "availableForSale":"متاح للبيع"
+    }
+  },
+  "sub-courses":{
+    "title": "الكورسات الفرعية",
+    "new": "كورس فرعي جديد",
+    "form-keys": {
+      "title": "العنوان",
+      "title-hint": "أدخل عنوان الكورس",
+      "title-placeholder": "أدخل اسم الكورس",
+      "price": "السعر",
+      "price-hint": "أدخل السعر",
+      "price-placeholder": "أدخل السعر",
+      "priceAfterDiscount": "السعر بعد الخصم",
+      "priceAfterDiscount-hint": "اكتب السعر بعد الخصم",
+      "priceAfterDiscount-placeholder": "اكتب السعر بعد الخصم",
+      "activeAttendee": "الحضور",
+      "activeAttendee-hint": "الحضور",
+      "activeAttendee-placeholder": "الحضور"
+    }
+  },
+  "login":{
+    "welcome": "أهلا بك",
+    "enter-your-details":"يرجى تعبئة الحقول لتسجيل الدخول",
+    "email":"البريد الإلكتروني",
+    "password":"كلمة المرور",
+    "remember-me":"تذكرني",
+    "forgot-password":"هل نسيت كلمة المرور؟",
+    "login":"تسجيل الدخول",
+    "dont-have-account":"ليس لديك حساب؟",
+    "create-account":"إنشاء حساب",
+    "copyright":"جميع الحقوق محفوظة"
+  }
+}

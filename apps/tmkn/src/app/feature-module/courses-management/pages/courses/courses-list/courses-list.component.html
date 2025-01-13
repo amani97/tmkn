@@ -1,0 +1,143 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content">
+    <tm-ui-main-header-title
+      [mainTitle]="'courses.list' | translate"
+      [showPrevButton]="false"
+      (clickPrevButton)="onClickPrevButton()"
+    >
+      <ng-container class="actions-container">
+        <app-tooltip-content />
+        <div class="mb-2">
+          <a
+            [routerLink]="addBtnLink"
+            class="btn btn-primary d-flex align-items-center"
+          >
+            <i class="ti ti-square-rounded-plus me-2"></i>
+            {{ 'courses.add-course' | translate }}
+          </a>
+        </div>
+      </ng-container>
+    </tm-ui-main-header-title>
+
+    <tm-ui-table
+      [metaData]="coursesMetaData"
+      [title]="'courses.list' | translate"
+      [data]="courses$"
+      [pagination]="pagination$"
+      [showSort]="true"
+      [showPagination]="true"
+      [loading]="loading$ | async"
+      [emptyDataMessage]="'No Data Found'"
+      [showAddButton]="true"
+      [addButtonTitle]="'Add new'"
+      [addButtonLink]="'./'"
+    >
+      <ng-container class="filter-actions">
+        <div class="d-flex gap-3">
+          <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" />
+              <input matEndDate placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <button
+            class="filter-btn"
+            mat-stroked-button
+            [matMenuTriggerFor]="menu"
+          >
+            <i class="ti ti-filter me-2"></i> Filter
+          </button>
+          <mat-menu #menu="matMenu" class="filter-menu" clic>
+            <div class="filter-container">
+              <div class="d-flex align-items-center border-bottom p-3">
+                <h2 class="filter-title">Filter</h2>
+              </div>
+
+              <div class="p-3 pb-0 border-bottom">
+                <!-- Filter Form -->
+                <form [formGroup]="filterForm">
+                  <div class="filter-row">
+                    <mat-form-field class="filter-field">
+                      <mat-label>Class</mat-label>
+                      <mat-select formControlName="class">
+                        <mat-option
+                          *ngFor="let classOption of classes"
+                          [value]="classOption"
+                        >
+                          {{ classOption }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="filter-field">
+                      <mat-label>Section</mat-label>
+                      <mat-select formControlName="section">
+                        <mat-option
+                          *ngFor="let section of sections"
+                          [value]="section"
+                        >
+                          {{ section }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="filter-row">
+                    <mat-form-field class="filter-field">
+                      <mat-label>Name</mat-label>
+                      <mat-select formControlName="name">
+                        <mat-option *ngFor="let name of names" [value]="name">
+                          {{ name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="filter-row">
+                    <mat-form-field class="filter-field">
+                      <mat-label>Gender</mat-label>
+                      <mat-select formControlName="gender">
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="filter-field">
+                      <mat-label>Status</mat-label>
+                      <mat-select formControlName="status">
+                        <mat-option value="Active">Active</mat-option>
+                        <mat-option value="Inactive">Inactive</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </form>
+              </div>
+
+              <div class="p-3 d-flex align-items-center justify-content-end">
+                <button mat-button type="button" (click)="resetFilters()">
+                  Reset
+                </button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  type="submit"
+                  (click)="applyFilters()"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </mat-menu>
+        </div>
+      </ng-container>
+    </tm-ui-table>
+  </div>
+</div>

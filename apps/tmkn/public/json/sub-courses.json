@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Sub Course 1",
+    "titleAr": "Sub Course 1",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 0
+  },
+  {
+    "id": 2,
+    "title": "Sub Course 2",
+    "titleAr": "Sub Course 2",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 0
+  },
+  {
+    "id": 3,
+    "title": "Service 1",
+    "titleAr": "Service 1",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 1
+  },
+  {
+    "id": 4,
+    "title": "Service 2",
+    "titleAr": "Service 2",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 1
+  },
+  {
+    "id": 5,
+    "title": "Paper note 1",
+    "titleAr": "Paper note 1",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 3
+  },
+  {
+    "id": 6,
+    "title": "Paper note 2",
+    "titleAr": "Paper note 2",
+    "price": 100,
+    "priceAfterDiscount": 50,
+    "activeAttendee": true,
+    "type": 3
+  }
+]

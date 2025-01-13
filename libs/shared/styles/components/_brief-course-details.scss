@@ -1,0 +1,17 @@
+app-brief-paper-note-details,
+app-brief-course-details {
+  .detail-item {
+    display: flex;
+    align-items: center;
+
+    .label {
+      @include rtl-style(margin-right, 10px, margin-left, 0, $isNgDeep: false);
+
+      &::after {
+        content: ':';
+        position: relative;
+        @include rtl-style(left, -4px, right, 0, $isNgDeep: false);
+      }
+    }
+  }
+}

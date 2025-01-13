@@ -1,0 +1,90 @@
+$size-range: 7;
+@mixin margin-classes {
+  @for $i from 0 through $size-range {
+    // ? ---- Note: 0.3125rem => 5px ? ----
+    $margin: $i * 0.3125rem;
+
+    .m-#{$i} {
+      margin: $margin !important;
+    }
+    .ml-#{$i} {
+      margin-left: $margin !important;
+      html[dir='rtl'] & {
+        margin-right: $margin !important;
+        margin-left: 0 !important;
+      }
+    }
+
+    .mr-#{$i} {
+      margin-right: $margin !important;
+      html[dir='rtl'] & {
+        margin-left: $margin !important;
+        margin-right: 0 !important;
+      }
+    }
+    .mt-#{$i} {
+      margin-top: $margin !important;
+    }
+    .mb-#{$i} {
+      margin-bottom: $margin !important;
+    }
+    .mx-#{$i} {
+      margin-left: $margin !important;
+      margin-right: $margin !important;
+    }
+    .my-#{$i} {
+      margin-top: $margin !important;
+      margin-bottom: $margin !important;
+    }
+  }
+}
+@include margin-classes;
+
+@mixin padding-classes {
+  @for $i from 0 through $size-range {
+    // ? ---- Note: 0.3125rem => 5px ? ----
+    $padding: $i * 0.3125rem;
+    .p-#{$i} {
+      padding: $padding !important;
+    }
+    .pl-#{$i} {
+      padding-left: $padding !important;
+      html[dir='rtl'] & {
+        padding-right: $padding !important;
+        padding-left: 0 !important;
+      }
+    }
+    .pr-#{$i} {
+      padding-right: $padding !important;
+      html[dir='rtl'] & {
+        padding-left: $padding !important;
+        padding-right: $padding !important;
+      }
+    }
+    .pt-#{$i} {
+      padding-top: $padding !important;
+    }
+    .pb-#{$i} {
+      padding-bottom: $padding !important;
+    }
+    .px-#{$i} {
+      padding-left: $padding !important;
+      padding-right: $padding !important;
+    }
+    .py-#{$i} {
+      padding-top: $padding !important;
+      padding-bottom: $padding !important;
+    }
+  }
+}
+@include padding-classes;
+
+$widths: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+@mixin width-classes {
+  @each $width in $widths {
+    .w-#{$width} {
+      width: $width * 1% !important;
+    }
+  }
+}
+@include width-classes;

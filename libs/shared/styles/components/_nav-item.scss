@@ -1,0 +1,35 @@
+tm-ui-nav-item {
+  a.mat-mdc-list-item.mat-mdc-list-item-interactive.mat-mdc-list-item-single-line {
+    margin-bottom: 5px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px !important;
+    height: 40px;
+
+    &.tm-mini-item {
+      .mdc-list-item__content {
+        .mdc-list-item__primary-text {
+          justify-content: center;
+        }
+      }
+    }
+
+    .mdc-list-item__content {
+      .mdc-list-item__primary-text {
+        display: flex;
+
+        i {
+          border-radius: 5px;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        span {
+          @include rtl-style(margin-left, 10px, margin-right, unset);
+        }
+      }
+    }
+  }
+}

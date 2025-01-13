@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-tabler-icon {
+    i.ti {
+      &.tm-primary {
+        color: mat.get-theme-color($theme, primary) !important;
+      }
+
+      &.tm-accent {
+        color: mat.get-theme-color($theme, tertiary) !important;
+      }
+
+      &.tm-warn {
+        color: mat.get-theme-color($theme, error) !important;
+      }
+
+      &.tm-gray {
+        color: #757d8a !important;
+      }
+
+      &.tm-white {
+        color: white !important;
+      }
+
+      &.tm-purple {
+        color: #7c04f9 !important;
+      }
+
+      &.tm-yellow {
+        color: #ffd233 !important;
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}

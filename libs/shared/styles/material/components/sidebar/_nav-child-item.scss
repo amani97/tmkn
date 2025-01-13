@@ -1,0 +1,101 @@
+@use '@angular/material' as mat;
+// TODO: Enhance nav-child-item
+@mixin color($theme) {
+  tm-ui-nav-child-item {
+    .mat-expansion-panel.nav-child-item:not(.tm-ui-section) {
+      background: transparent !important;
+      border-radius: 0 !important;
+
+      .mat-expansion-panel-header.nav-child-item-header {
+        &:hover,
+        &:hover:not([aria-disabled='true']) {
+          background: none !important;
+          background-color: mat.get-theme-color($theme, primary, 90) !important;
+        }
+        mat-panel-title {
+          i {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+            background: #f6f8fb;
+          }
+          span {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+          }
+        }
+
+        .mat-expansion-indicator {
+          &::after {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+          }
+        }
+
+        &.mat-expanded {
+          background-color: mat.get-theme-color($theme, primary, 90) !important;
+          mat-panel-title {
+            i {
+              color: mat.get-theme-color($theme, primary) !important;
+              background: #f6f8fb;
+            }
+            span {
+              color: mat.get-theme-color($theme, primary) !important;
+            }
+          }
+
+          .mat-expansion-indicator {
+            &::after {
+              color: mat.get-theme-color($theme, primary) !important;
+            }
+          }
+        }
+      }
+
+      .mat-expansion-panel-body {
+        background-color: none;
+      }
+
+      mat-list-item {
+        color: mat.get-theme-color($theme, primary) !important;
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  tm-ui-nav-child-item {
+    .mat-expansion-panel.nav-child-item {
+      .mat-expansion-panel {
+        &-header {
+          mat-panel-title {
+            i {
+              font-size: 16px;
+            }
+
+            span {
+              text-transform: capitalize;
+              font-size: 14px;
+              font-weight: 400;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-expansion-panel-body {
+      background-color: none;
+    }
+
+    mat-list-item {
+      color: mat.get-theme-color($theme, primary) !important;
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

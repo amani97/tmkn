@@ -1,0 +1,48 @@
+@switch (data.dialogType) { @case (DialogType.Delete) {
+<tm-ui-base-dialog
+  [headerIcon]="'info'"
+  [headerTitle]="data.title"
+  [submitTitle]="data.submitTitle"
+  [discardTitle]="data.discardTitle"
+  [dialogType]="data.dialogType"
+  [showHeader]="false"
+  [showActions]="false"
+>
+  <ng-container class="main-dialog-content">
+    <div class="d-flex justify-content-center">
+      <span class="delete-icon">
+        <i class="ti ti-trash-x"></i>
+      </span>
+    </div>
+    <h4 class="confirm-title">Confirm Deletion</h4>
+    <p class="confirm-message mat-h2">
+      {{ data.message }}
+    </p>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <button [mat-dialog-close]="false" type="button" class="btn btn-light me-3">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-danger" [mat-dialog-close]="true">
+        Yes, Delete
+      </button>
+    </div>
+  </ng-container>
+</tm-ui-base-dialog>
+} @default {
+<tm-ui-base-dialog
+  [headerIcon]="'info'"
+  [headerTitle]="data.title"
+  [submitTitle]="data.submitTitle"
+  [discardTitle]="data.discardTitle"
+  [dialogType]="data.dialogType"
+  [showActions]="true"
+  tmUiStylingConfirmationDialog
+>
+  <ng-container class="main-dialog-content">
+    <p class="mat-h2">
+      {{ data.message }}
+    </p>
+  </ng-container>
+</tm-ui-base-dialog>
+} }

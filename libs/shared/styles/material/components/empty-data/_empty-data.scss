@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-empty-data {
+    .container-empty-data {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .content {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+          width: inherit;
+        }
+
+        h1 {
+          color: mat.get-theme-color($theme, primary) !important;
+        }
+
+        button {
+          min-width: 120px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+}

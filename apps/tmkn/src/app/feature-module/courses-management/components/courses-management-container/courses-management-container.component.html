@@ -1,0 +1,31 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content">
+    <tm-ui-main-header-title
+      [mainTitle]="'courses.courses-management' | translate"
+    >
+    </tm-ui-main-header-title>
+
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="mb-4">
+      @for (link of list; track link) {
+      <a
+        mat-tab-link
+        [routerLink]="link.routerLink"
+        (click)="activeLink = link.routerLink"
+        [active]="activeLink === link.routerLink"
+      >
+        {{ link.title | translate }}
+      </a>
+      }
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+    <!-- <tm-ui-button-navigator [list]="list"></tm-ui-button-navigator> -->
+
+    @if(notInCourseForm$ | async){
+    <app-brief-course-details [course]="course"></app-brief-course-details>
+    }
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

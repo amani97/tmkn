@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '@angular/material' as mat;
+
+@mixin color($theme, $variants) {
+  app-brief-paper-note-details,
+  app-brief-course-details {
+    .detail-item {
+      .label {
+        color: mat.get-theme-color($theme, primary, 40);
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  app-brief-paper-note-details,
+  app-brief-course-details {
+    .detail-item {
+      .label {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .value {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@mixin theme($theme, $variants) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme, $variants);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

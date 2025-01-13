@@ -1,0 +1,238 @@
+{
+  "data": {
+    "title": "Test Course",
+    "description": "This is a test course",
+    "minimumPassingScores": 60,
+    "duration": 90,
+    "isRandomize": true,
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the capital of France What?",
+        "explanation": "The capital of France is Paris, known for its historical and cultural landmarks.",
+        "answers": [
+          {
+            "answer": "Paris",
+            "isCorrect": true
+          },
+          {
+            "answer": "London",
+            "isCorrect": false
+          },
+          {
+            "answer": "Berlin",
+            "isCorrect": false
+          },
+          {
+            "answer": "Rome",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Paris",
+        "type": 0
+      },
+      {
+        "id": 2,
+        "question": "Select the planets that are gas giants.",
+        "explanation": "Gas giants in our solar system include Jupiter, Saturn, Uranus, and Neptune.",
+        "answers": [
+          {
+            "answer": "Earth",
+            "isCorrect": false
+          },
+          {
+            "answer": "Jupiter",
+            "isCorrect": true
+          },
+          {
+            "answer": "Saturn",
+            "isCorrect": true
+          },
+          {
+            "answer": "Mars",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Gas_giant",
+        "type": 1
+      },
+      {
+        "id": 3,
+        "question": "Is water a compound?",
+        "explanation": "Water is a chemical compound composed of hydrogen and oxygen atoms.",
+        "answers": [
+          {
+            "answer": "Yes",
+            "isCorrect": true
+          },
+          {
+            "answer": "No",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Water",
+        "type": 2
+      },
+      {
+        "id": 4,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet', a famous tragic love story.",
+        "answers": [
+          {
+            "answer": "William Shakespeare",
+            "isCorrect": true
+          },
+          {
+            "answer": "Charles Dickens",
+            "isCorrect": false
+          },
+          {
+            "answer": "Mark Twain",
+            "isCorrect": false
+          },
+          {
+            "answer": "Jane Austen",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/William_Shakespeare",
+        "type": 0
+      },
+      {
+        "id": 5,
+        "question": "Select all noble gases.",
+        "explanation": "Noble gases are helium, neon, argon, krypton, xenon, and radon.",
+        "answers": [
+          {
+            "answer": "Oxygen",
+            "isCorrect": false
+          },
+          {
+            "answer": "Helium",
+            "isCorrect": true
+          },
+          {
+            "answer": "Neon",
+            "isCorrect": true
+          },
+          {
+            "answer": "Nitrogen",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Noble_gas",
+        "type": 1
+      },
+      {
+        "id": 6,
+        "question": "Is the Earth flat?",
+        "explanation": "The Earth is an oblate spheroid, not flat.",
+        "answers": [
+          {
+            "answer": "Yes",
+            "isCorrect": false
+          },
+          {
+            "answer": "No",
+            "isCorrect": true
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Earth",
+        "type": 2
+      },
+      {
+        "id": 7,
+        "question": "What is the chemical symbol for water?",
+        "explanation": "Water is chemically represented by the formula H2O.",
+        "answers": [
+          {
+            "answer": "H2O",
+            "isCorrect": true
+          },
+          {
+            "answer": "O2",
+            "isCorrect": false
+          },
+          {
+            "answer": "CO2",
+            "isCorrect": false
+          },
+          {
+            "answer": "H2",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Water",
+        "type": 0
+      },
+      {
+        "id": 8,
+        "question": "Select the primary colors of light.",
+        "explanation": "The primary colors of light are red, green, and blue.",
+        "answers": [
+          {
+            "answer": "Red",
+            "isCorrect": true
+          },
+          {
+            "answer": "Blue",
+            "isCorrect": true
+          },
+          {
+            "answer": "Green",
+            "isCorrect": true
+          },
+          {
+            "answer": "Yellow",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Primary_color",
+        "type": 1
+      },
+      {
+        "id": 9,
+        "question": "Is hydrogen the lightest element?",
+        "explanation": "Hydrogen, with an atomic number of 1, is the lightest and most abundant element in the universe.",
+        "answers": [
+          {
+            "answer": "Yes",
+            "isCorrect": true
+          },
+          {
+            "answer": "No",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Hydrogen",
+        "type": 2
+      },
+      {
+        "id": 10,
+        "question": "What is the smallest unit of life?",
+        "explanation": "The cell is the smallest structural and functional unit of life.",
+        "answers": [
+          {
+            "answer": "Atom",
+            "isCorrect": false
+          },
+          {
+            "answer": "Cell",
+            "isCorrect": true
+          },
+          {
+            "answer": "Organ",
+            "isCorrect": false
+          },
+          {
+            "answer": "Molecule",
+            "isCorrect": false
+          }
+        ],
+        "externalURL": "https://en.wikipedia.org/wiki/Cell_(biology)",
+        "type": 0
+      }
+    ]
+  },
+  "totalData": 6
+}

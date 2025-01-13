@@ -1,0 +1,26 @@
+@if (children() && children().length === 0) {
+<a
+  mat-list-item
+  [routerLink]="routeLink()"
+  routerLinkActive="active"
+  [matTooltip]="expanded() ? '' : title()"
+  matTooltipPosition="right"
+  matTooltipClass="tooltip"
+  (isActiveChange)="changeActiveStatus($event)"
+  [disabled]="disabled()"
+  [ngClass]="expanded() ? 'tm-full-item' : 'tm-mini-item'"
+>
+  <i title mat-list-icon [ngClass]="['list-item__icon', icon()]"></i>
+  <span [hidden]="!expanded()" mat-line>{{ title() | translate }}</span>
+</a>
+} @if (children() && children().length > 0) {
+<tm-ui-nav-child-item
+  [expanded]="expanded()"
+  [title]="title() | translate"
+  [routeLink]="routeLink()"
+  [icon]="icon()"
+  [isActive]="isActive()"
+  [children]="children()"
+  [disabled]="disabled()"
+></tm-ui-nav-child-item>
+}

@@ -1,0 +1,107 @@
+.question-list-container {
+  position: relative;
+
+  .absolute-wrapper {
+    position: absolute;
+
+    .fixed-wrapper {
+      position: fixed;
+      max-height: 64%;
+      width: 20%;
+      z-index: 1;
+    }
+
+    .scrollable {
+      top: 24%;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
+    .header-question-list {
+      z-index: 2;
+      .header-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        border-bottom: 1px solid #e9edf4;
+        height: 50px;
+      }
+    }
+  }
+}
+.btn-add-circle {
+  border-radius: 150%;
+  width: 30px;
+  height: 30px;
+  background-color: #506ee4;
+  color: white;
+  border: none;
+}
+
+.btn-remove-circle {
+  border-radius: 150%;
+  width: 30px;
+  height: 30px;
+  background-color: #e82646;
+  color: white;
+  border: none;
+  position: relative;
+  top: 5px;
+}
+
+mat-list-option[aria-selected='true'] {
+  border-left: 3px solid #506ee4;
+  background-color: #ebeef8;
+}
+
+::ng-deep .mdc-list-item.mdc-list-item--with-one-line .mdc-list-item__end {
+  display: none;
+}
+
+.question-item {
+  border-bottom: 1px solid #e9edf4;
+
+  .question-que {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 85%;
+  }
+}
+.cdk-drag-preview {
+  background-color: #6a9cf3;
+}
+
+.cdk-drag-placeholder {
+  background-color: #acc8f8;
+}
+
+.cdk-drop-list-dragging {
+  background-color: #c4cee1;
+}
+
+mat-label {
+  font-size: 19;
+  font-weight: bold;
+}
+
+.input-radio {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+
+.answer-label {
+  margin-left: 55px;
+  margin-bottom: 5px;
+}
+
+.delete-btn {
+  border-radius: 150%;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border: none;
+}

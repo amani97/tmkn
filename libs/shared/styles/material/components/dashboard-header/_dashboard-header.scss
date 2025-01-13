@@ -1,0 +1,100 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-dashboard-header {
+    .dashboard-header {
+      background-color: #ffffff;
+      height: 56px;
+      z-index: 1000;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      transition: all 0.5s ease;
+      border-bottom: 1px solid #E9EDF4;
+
+      mat-toolbar-row {
+        .profile-wrapper {
+          .name-container {
+            color: mat.get-theme-color($theme, primary) !important;
+          }
+
+          .img-container {
+            img {
+              border: 2px solid mat.get-theme-color($theme, primary) !important;
+            }
+            .initials-circle {
+              border: 2px solid mat.get-theme-color($theme, primary) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .profile-menu {
+    .mat-mdc-menu-panel {
+      &.custom-menu {
+        background-color: #f5f5f5;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+        .menu-item {
+          .mat-mdc-menu-item-text {
+            color: mat.get-theme-color($theme, primary) !important;
+          }
+
+          &:hover {
+            background-color: #e0e0e0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+
+  tm-ui-dashboard-header {
+    .dashboard-header {
+      mat-toolbar-row {
+
+        .profile-wrapper {
+          .name-container {
+            text-decoration: none;
+
+            span {
+              line-height: 21px;
+            }
+            .user-welcome {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .profile-menu{
+    .mat-mdc-menu-panel {
+      &.custom-menu {
+        .menu-item {
+          .mat-mdc-menu-item-text {
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

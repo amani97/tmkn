@@ -1,0 +1,116 @@
+{
+  "general": {
+    "back": "Back"
+  },
+  "breadcrumb": {
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "courses-management": "Courses Management",
+    "courses-list": "Courses List",
+    "courses-details": "Courses Details",
+    "courses-form": "Courses Form"
+  },
+  "navigation": {
+    "main-section": {
+      "title": "Main",
+      "courses": "Courses"
+    },
+    "users": {
+      "title": "Users",
+      "students": "Students",
+      "teachers": "Teachers"
+    }
+  },
+  "brief-course-details": {
+    "title": "Course Details",
+    "name": "Title",
+    "secondLevel": "Second level",
+    "teacher": "Teacher",
+    "class": "Class",
+    "active": "Active",
+    "accepted": "Accepted",
+    "showHomePage": "Show Home Page"
+  },
+  "courses": {
+    "title": "Courses",
+    "list": "Courses List",
+    "courses-management": "Courses Management",
+    "sub-courses": "Sub Courses",
+    "sub-courses-and-services": "Sub Courses and Services",
+    "services": "Services",
+    "paper-notes": "Paper Notes",
+    "lectures": "Lectures",
+    "selected-course": "Selected Course",
+    "add-course": "Add Course",
+    "form": "Course Form",
+    "new-course": "New Course",
+    "arabic": "Arabic",
+    "english": "English",
+    "form-keys": {
+      "title": "Title",
+      "title-hint": "Enter course name",
+      "title-placeholder": "Enter course name",
+      "description": "Description",
+      "description-hint": "Enter description",
+      "description-placeholder": "Enter description",
+      "firstLevel": "First level",
+      "firstLevel-hint": "Select First level",
+      "firstLevel-placeholder": "Select First level",
+      "secondLevel": "Second level",
+      "secondLevel-hint": "Select Second level",
+      "secondLevel-placeholder": "Select Second level",
+      "thirdLevel": "Third level",
+      "thirdLevel-hint": "Select Third level",
+      "thirdLevel-placeholder": "Select Third level",
+      "teacher": "Teacher",
+      "teacher-hint": "Select teacher",
+      "teacher-placeholder": "Select teacher",
+      "class": "Class",
+      "class-hint": "Select class",
+      "class-placeholder": "Select class",
+      "whatsappGroupLink": "Whatsapp Group Link",
+      "whatsappGroupLink-hint": "Write Whatsapp Group Link",
+      "whatsappGroupLink-placeholder": "Write Whatsapp Group Link",
+      "price": "Price",
+      "price-hint": "Course price",
+      "price-placeholder": "Course price",
+      "price-after-discount": "Course price after discount",
+      "price-after-discount-hint": "Write course price after discount",
+      "price-after-discount-placeholder": "Write course price after discount",
+      "active": "Active",
+      "showAtHomePage": "Show at home page",
+      "showAtStoreNotes": "Show at store notes",
+      "availableForSale": "Available for sale"
+    }
+  },
+  "sub-courses": {
+    "title": "Sub Courses",
+    "new": "New sub course",
+    "form-keys": {
+      "title": "Title",
+      "title-hint": "Enter course name",
+      "title-placeholder": "Enter course name",
+      "price": "Price",
+      "price-hint": "Enter price",
+      "price-placeholder": "Enter price",
+      "priceAfterDiscount": "Price After Discount",
+      "priceAfterDiscount-hint": "Write Price After Discount",
+      "priceAfterDiscount-placeholder": "Write Price After Discount",
+      "activeAttendee": "Active Attendee",
+      "activeAttendee-hint": "Check Active Attendee",
+      "activeAttendee-placeholder": "Check Active Attendee"
+    }
+  },
+  "login": {
+    "welcome": "Welcome",
+    "enter-your-details": "Please enter your details to sign in",
+    "email": "Email Address",
+    "password": "Password",
+    "remember-me": "Remember Me",
+    "forgot-password": "Forgot Password?",
+    "login": "Sign In",
+    "dont-have-account": "Don’t have an account?",
+    "create-account": "Create Account",
+    "copyright": "Copyright"
+  }
+}

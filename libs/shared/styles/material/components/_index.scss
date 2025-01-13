@@ -1,0 +1,37 @@
+@use './icon/icon' as icon;
+@use './icon/tabler-icon' as tabler-icon;
+@use './sidebar/tm-ui-nav-item' as tm-ui-nav-item;
+@use './sidebar/nav-child-item' as nav-child-item;
+@use './sidebar/sidebar' as sidebar;
+@use './dashboard-header/dashboard-header' as dashboard-header;
+@use './empty-data/empty-data' as empty-data;
+@use './value-container/value-container' as value-container;
+@use './table/table' as table;
+@use './table/tree-table' as tree-table;
+@use './layout/main-header-title' as main-header-title;
+@use './layout/section' as section;
+@use './button/buttons' as buttons;
+@use './brief-course-details/brief-course-details' as brief-course-details;
+@use './dialogs/base-dialog' as base-dialog;
+@use './dialogs/confirm-dialog' as confirm-dialog;
+@use './form-fields/form-fields' as form-fields;
+
+@mixin theme($theme, $variants) {
+  @include icon.theme($theme);
+  @include tabler-icon.theme($theme);
+  @include tm-ui-nav-item.theme($theme);
+  @include nav-child-item.theme($theme);
+  @include sidebar.theme($theme);
+  @include dashboard-header.theme($theme);
+  @include empty-data.theme($theme);
+  @include value-container.theme($theme);
+  @include table.theme($theme);
+  @include tree-table.theme($theme);
+  @include main-header-title.theme($theme);
+  @include section.theme($theme);
+  @include buttons.theme($theme, $variants);
+  @include brief-course-details.theme($theme, $variants);
+  @include base-dialog.theme($theme);
+  @include confirm-dialog.theme($theme);
+  @include form-fields.theme($theme);
+}

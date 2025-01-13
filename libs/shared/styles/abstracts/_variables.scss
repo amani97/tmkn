@@ -1,0 +1,198 @@
+// ? Define Palette Colors For Clinic Pulse
+$tmkn-primary: (
+  50: #e1ecfd,
+  100: #778DDA,
+  200: #5D73BF,
+  300: #435AA4,
+  400: #364E97,
+  500: #2A428A,
+  600: #1C367E,
+  700: #0C2A73,
+  800: #00164D,
+  900: #00164D,
+  A100: #ffffff,
+  A200: #d9dfff,
+  A400: #a6b4ff,
+  A700: #8c9eff,
+  contrast: (
+    50: #242a38,
+    100: #242a38,
+    200: #242a38,
+    300: #242a38,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #242a38,
+    A200: #242a38,
+    A400: #242a38,
+    A700: #242a38,
+  ),
+);
+
+$tmkn-accent: (
+  50: #e3faf4,
+  100: #b9f3e3,
+  200: #8aebd0,
+  300: #5be3bd,
+  400: #38ddaf,
+  500: #15d7a1,
+  600: #12d399,
+  700: #0fcd8f,
+  800: #0cc785,
+  900: #06be74,
+  A100: #e7fff4,
+  A200: #b4ffde,
+  A400: #81ffc7,
+  A700: #68ffbc,
+  contrast: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$tmkn-warn: (
+  50: #fceaeb,
+  100: #f9cccc,
+  200: #f5aaaa,
+  300: #f08788,
+  400: #ed6e6f,
+  500: #ea5455,
+  600: #e74d4e,
+  700: #e44344,
+  800: #e13a3b,
+  900: #db292a,
+  A100: #ffffff,
+  A200: #ffe6e6,
+  A400: #ffb3b4,
+  A700: #ff9a9a,
+  contrast: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$tmkn-yellow: (
+  50: #fffae7,
+  100: #fff2c2,
+  200: #ffe999,
+  300: #ffe070,
+  400: #ffd952,
+  500: #ffd233,
+  600: #ffcd2e,
+  700: #ffc727,
+  800: #ffc120,
+  900: #ffb614,
+  A100: #ffffff,
+  A200: #fffefb,
+  A400: #ffecc8,
+  A700: #ffe4ae,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$tmkn-purple: (
+  50: #efe1fe,
+  100: #d8b4fd,
+  200: #be82fc,
+  300: #a34ffb,
+  400: #902afa,
+  500: #7c04f9,
+  600: #7403f8,
+  700: #6903f7,
+  800: #5f02f6,
+  900: #4c01f5,
+  A100: #ffffff,
+  A200: #eee8ff,
+  A400: #c7b5ff,
+  A700: #b49cff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$light-gray-border-color: #e6e7e9;
+$background-gray-color: #f8f8f8;
+// ? Define Font Family For Clinic Pulse
+$tmkn-font-family: "'Roboto', sans-serif";
+
+$grid-breakpoints: (
+  xs: 0,
+  // handset portrait (small, medium, large) | handset landscape (small)
+  sm: 600px,
+  // handset landscape (medium, large) | tablet portrait (small, large)
+  md: 960px,
+  // tablet landscape (small, large)
+  lg: 1280px,
+  // laptops and desktops
+  xl: 1600px // large desktops,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+);
+
+$container-max-widths: (
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1600px,
+);
+
+$spacer: 1rem; // You Can Customize it for [Spacing Utilities]
+
+// Define Clinic Pulse Colors
+:root {
+  --tmkn-primary-color: #085ff0;
+  --tmkn-accent-color: #15d7a1;
+  --tmkn-accent-color-light: #5be3bd;
+}

@@ -1,0 +1,236 @@
+<div [ngClass]="!isEditMode ? 'page-wrapper' : ''">
+  <div [ngClass]="!isEditMode ? 'content' : ''">
+    @if(!isEditMode){
+    <tm-ui-main-header-title
+      [mainTitle]="'courses.form' | translate"
+      (clickPrevButton)="onClickPrevButton()"
+    ></tm-ui-main-header-title>
+    }
+
+    <tm-ui-section [icon]="'ti ti-book'" [title]="'courses.form' | translate">
+      <ng-container class="card-content-container">
+        <form [formGroup]="courseFg" *ngIf="courseFg" class="w-100">
+          <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <img
+                  src="./assets/images/flags/us.png"
+                  alt="{{ 'courses.english' | translate }}"
+                />
+                {{ 'courses.english' | translate }}
+              </ng-template>
+
+              <div class="row w-100">
+                <div class="col-lg-12 mb-3">
+                  <mat-label>Title</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      formControlName="title"
+                      [placeholder]="'Title'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                  <tm-ui-ngx-editor
+                    [label]="'Description'"
+                    [formGroup]="courseFg"
+                    [fcName]="'description'"
+                  ></tm-ui-ngx-editor>
+                </div>
+
+                <div class="col-lg-4 mb-3">
+                  <mat-label>First level</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="firstLevel">
+                      <mat-option
+                        *ngFor="let option of firstLevelOptions"
+                        [value]="option.key"
+                      >
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 mb-3">
+                  <mat-label>Second level</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="secondLevel">
+                      <mat-option
+                        *ngFor="let option of secondLevelOptions"
+                        [value]="option.key"
+                      >
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 mb-3">
+                  <mat-label>Third Level</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="thirdLevel">
+                      <mat-option
+                        *ngFor="let option of thirdLevelOptions"
+                        [value]="option.key"
+                      >
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                  <mat-label>Teacher</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="teacher">
+                      <mat-option
+                        *ngFor="let option of teacherOptions"
+                        [value]="option.key"
+                      >
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                  <mat-label>Class</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-select formControlName="class">
+                      <mat-option
+                        *ngFor="let option of classOptions"
+                        [value]="option.key"
+                      >
+                        {{ option.value }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                  <mat-label>Price</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="price"
+                      [placeholder]="'Price'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                  <mat-label>Price after discount</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="priceAfterDiscount"
+                      [placeholder]="'Price After Discount'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 mb-3">
+                  <mat-label>Whatsapp Group Link</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      formControlName="whatsappGroupLink"
+                      [placeholder]="'Whatsapp Group Link'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="active">Active</mat-checkbox>
+                </div>
+
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="showAtHomePage"
+                    >Show at home page</mat-checkbox
+                  >
+                </div>
+
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="showAtStoreNotes"
+                    >Show at store notes</mat-checkbox
+                  >
+                </div>
+
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="availableForSale"
+                    >Available for sale</mat-checkbox
+                  >
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <img
+                  src="./assets/images/flags/kw.png"
+                  alt="{{ 'courses.arabic' | translate }}"
+                />
+                {{ 'courses.arabic' | translate }}
+              </ng-template>
+
+              <div class="row w-100">
+                <div class="col-lg-12 mb-3">
+                  <mat-label>Title</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      formControlName="titleAr"
+                      [placeholder]="'Title'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                  <tm-ui-ngx-editor
+                    [label]="'Description'"
+                    [formGroup]="courseFg"
+                    [fcName]="'descriptionAr'"
+                  ></tm-ui-ngx-editor>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </form>
+
+        <div class="row mt-3">
+          <div class="col-lg-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-light btn-w-lg me-2"
+              (click)="onClickPrevButton()"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-w-lg"
+              (click)="onSubmit()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </tm-ui-section>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@switch (type()) {
+  @case ('text') {
+    <span [attributes]="attribute()" [class]="classes()">{{ value() }}</span>
+  }
+  @case ('link') {
+    <a [routerLink]="link()" [attributes]="attribute()" [class]="classes()!" [ngClass]="'tm-link'">{{ value() }}</a>
+  }
+  @case ('number') {
+    <span [attributes]="attribute()" [class]="classes()">{{ value() }}</span>
+  }
+  @case ('image') {
+    <img [attributes]="attribute()" [class]="classes()" [src]="value()" alt="">
+  }
+  @case ('timeAgo') {
+    <span [attributes]="attribute()" [class]="classes()">{{ value() | timeAgo | async }}</span>
+  }
+  @case ('currency') {
+    <!-- TODO: Add Currency Pipe -->
+    <span [attributes]="attribute()" [class]="classes()">{{ value()  }}</span>
+  }
+  @case ('date') {
+    <span [attributes]="attribute()" [class]="classes()">{{ value() | date: dateFormat() }}</span>
+  }
+  @case('highlighted'){
+    <span [attributes]="attribute()" [class]="classes() + ' tm-highlighted'" [ngClass]="getHighlightedColors(highlightedColors())"> {{value()}}</span>
+  }
+  @default {
+    <span [attributes]="attribute()" [class]="classes()">{{ value() }}</span>
+  }
+}

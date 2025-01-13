@@ -1,0 +1,70 @@
+<tm-ui-section
+  [icon]="'ti ti-book'"
+  [title]="'brief-course-details.title' | translate"
+>
+  <ng-container class="card-content-container">
+    <div class="row" *ngIf="course() as course">
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.name' | translate }}
+          </span>
+          <span class="value">{{ course.title }}</span>
+        </span>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.secondLevel' | translate }}
+          </span>
+          <span class="value">{{ course.secondLevel }}</span>
+        </span>
+      </div>
+
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.teacher' | translate }}
+          </span>
+          <span class="value">{{ course.teacher }}</span>
+        </span>
+      </div>
+
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.class' | translate }}
+          </span>
+          <span class="value">{{ course.class }}</span>
+        </span>
+      </div>
+
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.active' | translate }}
+          </span>
+          <span class="value">{{ course.active }}</span>
+        </span>
+      </div>
+
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.accepted' | translate }}
+          </span>
+          <span class="value">{{ course.accepted }}</span>
+        </span>
+      </div>
+
+      <div class="col-lg-3 mb-3">
+        <span class="detail-item">
+          <span class="label">
+            {{ 'brief-course-details.showHomePage' | translate }}
+          </span>
+          <span class="value">{{ course.showHomePage }}</span>
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</tm-ui-section>

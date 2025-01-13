@@ -1,0 +1,12 @@
+<div class="container-empty-data p-5">
+  <div class="content">
+    <img class="mb-4" src="./assets/images/empty-data.svg" alt="" />
+    <h1 class="mb-5">{{ message() }}</h1>
+
+    @if (showAddButton()) {
+      <button mat-flat-button color="primary" (click)="onClickButton()">
+        {{ addButtonTitle() }}
+      </button>
+    }
+  </div>
+</div>

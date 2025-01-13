@@ -1,0 +1,128 @@
+@keyframes inwards-open {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes inwards-close {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes top-to-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bottom-to-top {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes right-to-left {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.open-animate {
+  animation: inwards-open 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+.close-animate {
+  animation: inwards-close 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+.top-to-bottom-animation {
+  animation: top-to-bottom 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.bottom-to-top-animation {
+  animation: bottom-to-top 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.left-to-right-animation {
+  animation: left-to-right 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.right-to-left-animation {
+  animation: right-to-left 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.fade-in-animation {
+  animation: fade-in 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.fade-out-animation {
+  animation: fade-out 1800ms cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+.rotate {
+  transform: rotate(0);
+  animation: rotate 1s linear forwards;
+}
+
+.flip {
+  transform: rotateY(0deg);
+  animation: flip 1s linear forwards;
+}

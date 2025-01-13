@@ -1,0 +1,60 @@
+tm-ui-base-dialog {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .top-header {
+    width: auto;
+    height: 50px;
+    padding: 10px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 22px;
+
+    .start-side,
+    .end-side {
+      display: flex;
+      align-items: center;
+    }
+
+    .close-btn {
+      cursor: pointer;
+    }
+  }
+
+  .mdc-dialog__title::before {
+    display: none !important;
+  }
+
+  .mat-mdc-dialog-container {
+    position: relative !important;
+    padding: 0 !important;
+    padding-bottom: 25px !important;
+    border-radius: 6px !important;
+  }
+
+  .dialog-main-content {
+    // TODO: Check For Later
+    // display: flex;
+    // justify-content: flex-start;
+    padding: 10px 22px !important;
+    margin: 0;
+    margin-bottom: 22px;
+  }
+
+  .main-action {
+    position: relative !important;
+    padding: 10px 22px !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__btn {
+      // flex: 1;
+      margin: 0 8px;
+    }
+  }
+}

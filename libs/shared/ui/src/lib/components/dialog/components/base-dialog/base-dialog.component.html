@@ -1,0 +1,51 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div mat-dialog-title class="top-header" *ngIf="showHeader()">
+  <!-- Left Side (LTR) -->
+  <div class="start-side">
+    <i [ngClass]="[headerIcon()]"></i>
+    <h3 class="title mb-0 p-1">{{ headerTitle() }}</h3>
+  </div>
+  <!-- Left Side (LTR) -->
+  <!-- Right Side (LTR) -->
+  <div class="end-side">
+    <i class="ti ti-circle-dashed-x" (click)="onClose()"></i>
+  </div>
+  <!-- Right Side (LTR) -->
+</div>
+
+<div mat-dialog-content class="dialog-main-content">
+  <ng-content select=".main-dialog-content"></ng-content>
+</div>
+<!-- Dialog Actions -->
+@if (showActions()) {
+<div mat-dialog-actions class="main-action">
+  @if (showSubmitAndReset()) {
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="onSubmitAndResetDialog()"
+    [disabled]="!isValidForm"
+    class="main-action__btn"
+  >
+    {{ submitAndResetTitle() }}
+  </button>
+  }
+
+  <button
+    type="button"
+    class="btn btn-primary btn-w-md me-2"
+    (click)="onSubmitDialog()"
+  >
+    {{ submitTitle() }}
+  </button>
+  <button
+    [mat-dialog-close]="false"
+    (click)="onDiscardedDialog()"
+    type="button"
+    class="btn btn-outline-danger btn-w-md"
+  >
+    {{ discardTitle() }}
+  </button>
+</div>
+}
+<!-- Dialog Actions -->

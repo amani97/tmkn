@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../typography/config' as typography;
+@use '../../abstracts/variables' as var;
+// @use '../components';
+
+$dark-primary: mat.m2-define-palette(var.$tmkn-primary);
+$dark-accent: mat.m2-define-palette(var.$tmkn-accent, 500, A200, A100, A400);
+$dark-warn: mat.m2-define-palette(var.$tmkn-warn);
+
+$tm-dark-theme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+  )
+);
+
+// ! For Define Another Color on Material Components
+$tm-dark-success: mat.m2-define-palette(mat.$m2-light-green-palette);
+$tm-dark-info: mat.m2-define-palette(mat.$m2-light-blue-palette);
+
+$my-app-dark-variants: (
+  success: $tm-dark-success,
+  info: $tm-dark-info,
+);
+
+.dark-theme {
+  @include mat.core-color($tm-dark-theme);
+  @include mat.button-color($tm-dark-theme);
+  // @include components.theme($tm-dark-theme, typography.$tm-typography, $my-app-dark-variants);
+  @include mat.all-component-themes($tm-dark-theme);
+}

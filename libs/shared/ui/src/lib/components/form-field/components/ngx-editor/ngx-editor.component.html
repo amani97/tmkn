@@ -1,0 +1,6 @@
+<ng-container [formGroup]="formGroup()">
+  <mat-label>{{ label() }}</mat-label>
+  <ngx-editor [editor]="editor" [formControlName]="fcName()">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+  </ngx-editor>
+</ng-container>

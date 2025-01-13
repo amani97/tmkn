@@ -1,0 +1,103 @@
+@use '@angular/material' as mat;
+
+@mixin color($theme) {
+  tm-ui-section {
+    .tm-ui-section {
+      background: transparent !important;
+      border-radius: 0 !important;
+
+      .tm-ui-section-header {
+        background-color: mat.get-theme-color($theme, primary, 90) !important;
+
+        &:hover,
+        &:hover:not([aria-disabled='true']) {
+          background: none !important;
+          background-color: mat.get-theme-color($theme, primary, 90) !important;
+        }
+        mat-panel-title {
+          i {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+            background: #f6f8fb;
+          }
+          span {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+          }
+        }
+
+        .mat-expansion-indicator {
+          &::after {
+            color: mat.get-theme-color($theme, primary, 10) !important;
+          }
+        }
+
+        &.mat-expanded {
+          background-color: mat.get-theme-color($theme, primary, 90) !important;;
+          mat-panel-title {
+            i {
+              color: mat.get-theme-color($theme, primary) !important;
+              background: #f6f8fb;
+            }
+            span {
+              color: mat.get-theme-color($theme, primary) !important;
+            }
+          }
+
+          .mat-expansion-indicator {
+            &::after {
+              color: mat.get-theme-color($theme, primary) !important;
+            }
+          }
+        }
+      }
+
+      .mat-expansion-panel-body {
+        background-color: none;
+      }
+
+      mat-list-item {
+        color: mat.get-theme-color($theme, primary) !important;
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  tm-ui-section {
+    .mat-expansion-panel.tm-ui-section {
+      .mat-expansion-panel {
+        &-header {
+          mat-panel-title {
+            i {
+              font-size: 16px;
+            }
+
+            span {
+              text-transform: capitalize;
+              font-size: 14px;
+              font-weight: 400;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-expansion-panel-body {
+      background-color: none;
+    }
+
+    mat-list-item {
+      color: mat.get-theme-color($theme, primary) !important;
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+
+  @if mat.theme-has($theme, typography) {
+    @include typography($theme);
+  }
+}

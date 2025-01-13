@@ -1,0 +1,103 @@
+<tm-ui-base-dialog
+  headerIcon="ti ti-paperclip"
+  [headerTitle]="'Paper Note Form'"
+  [showActions]="true"
+  [submitTitle]="'Add'"
+  [discardTitle]="'Cancel'"
+  (submitAction)="onSubmit()"
+>
+  <div class="main-dialog-content">
+    <div class="row">
+      <div class="col-lg-12">
+        <form [formGroup]="paperNoteFg" *ngIf="paperNoteFg" class="w-100">
+          <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <img
+                  src="./assets/images/flags/us.png"
+                  alt="{{ 'courses.english' | translate }}"
+                />
+                {{ 'courses.english' | translate }}
+              </ng-template>
+
+              <div class="row w-100">
+                <div class="col-lg-12 mb-3">
+                  <mat-label>Title</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      formControlName="title"
+                      [placeholder]="'Title'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                  <tm-ui-ngx-editor
+                    [label]="'Description'"
+                    [formGroup]="paperNoteFg"
+                    [fcName]="'description'"
+                  ></tm-ui-ngx-editor>
+                </div>
+
+                <div class="col-lg-6 mb-3">
+                  <mat-label>Price</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      type="number"
+                      formControlName="price"
+                      [placeholder]="'Price'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                  <tm-ui-upload-file
+                    [label]="'Upload Image'"
+                    [formGroup]="paperNoteFg"
+                    [fcName]="'image'"
+                  ></tm-ui-upload-file>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <img
+                  src="./assets/images/flags/kw.png"
+                  alt="{{ 'courses.arabic' | translate }}"
+                />
+                {{ 'courses.arabic' | translate }}
+              </ng-template>
+
+              <div class="row w-100">
+                <div class="col-lg-12 mb-3">
+                  <mat-label>Title (Arabic)</mat-label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input
+                      matInput
+                      formControlName="titleAr"
+                      [placeholder]="'Title'"
+                    />
+                    <mat-error tmUiFormErrorMessages></mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 mb-3">
+                  <tm-ui-ngx-editor
+                    [label]="'Description (Arabic)'"
+                    [formGroup]="paperNoteFg"
+                    [fcName]="'descriptionAr'"
+                  ></tm-ui-ngx-editor>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </form>
+      </div>
+    </div>
+  </div>
+</tm-ui-base-dialog>
