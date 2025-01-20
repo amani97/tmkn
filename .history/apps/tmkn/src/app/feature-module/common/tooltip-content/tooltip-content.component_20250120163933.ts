@@ -13,6 +13,6 @@ export class TooltipContentComponent {
   constructor(private excelExportService: ExcelExportService) {}
 
   exportData() {
-    this.excelExportService.exportToExcel(['this.data'], 'EmployeeData');
+    this.excelExportService.exportToExcel(['this.data', 'EmployeeData');
   }
 }

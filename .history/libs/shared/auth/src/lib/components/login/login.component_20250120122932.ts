@@ -45,23 +45,23 @@ export class LoginComponent {
     this.router.navigate([AuthRoute.Main, AuthRoute.ForgetPassword]);
   }
 
-   onSubmit() {
+  async onSubmit(): Promise<void> {
     console.log(this.loginFg)
     if (this.loginFg.valid) {
       const userCredential: UserCredential = {
         userName: this.loginFg?.get('userName')?.value,
         password: this.loginFg?.get('password')?.value,
       };
-      this.router.navigate(['dashboard']);
-      // this.authenticationAPIService.login(userCredential).subscribe({
-      //   next: () => {
-      //     if (this.authenticationFacade.redirectUrl.includes('dashboard')) {
-      //       this.router.navigate([this.authenticationFacade.redirectUrl || '']);
-      //     } else {
-      //       this.router.navigate(['dashboard']);
-      //     }
-      //   },
-      // });
+      c
+      this.authenticationAPIService.login(userCredential).subscribe({
+        next: () => {
+          if (this.authenticationFacade.redirectUrl.includes('dashboard')) {
+            this.router.navigate([this.authenticationFacade.redirectUrl || '']);
+          } else {
+            this.router.navigate(['dashboard']);
+          }
+        },
+      });
     }
   }
 

@@ -1,12 +1,7 @@
-import {LoginComponent} from 'libs/shared/auth/src/lib/components/login/login.component';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+
   {
     path: '',
     loadChildren: () =>
@@ -22,8 +17,4 @@ export const appRoutes: Route[] = [
         (m) => m.ErrorPagesModule
       ),
   },
-  {
-    path:'login',
-    component:LoginComponent
-  }
 ];

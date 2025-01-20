@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { AuthRoute } from '../../settings';
-import { IAuthenticationAPIService } from '../../abstracts/services';
 import { IAuthenticationFacade } from '../../abstracts/facades/authentication.abstract';
-import { ILoaderFacade } from '@tmkn/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCredential } from '../../model/dtos';
+import { Router } from '@angular/router';
+import { IAuthenticationAPIService } from '../../abstracts/services';
+import { AuthRoute } from '../../settings';
+import { Subject } from 'rxjs';
+import { ILoaderFacade } from '@tmkn/core';
 
 @Component({
   selector: 'auth-login',
@@ -45,23 +44,21 @@ export class LoginComponent {
     this.router.navigate([AuthRoute.Main, AuthRoute.ForgetPassword]);
   }
 
-   onSubmit() {
-    console.log(this.loginFg)
+  async onSubmit(): Promise<void> {
     if (this.loginFg.valid) {
       const userCredential: UserCredential = {
         userName: this.loginFg?.get('userName')?.value,
         password: this.loginFg?.get('password')?.value,
       };
-      this.router.navigate(['dashboard']);
-      // this.authenticationAPIService.login(userCredential).subscribe({
-      //   next: () => {
-      //     if (this.authenticationFacade.redirectUrl.includes('dashboard')) {
-      //       this.router.navigate([this.authenticationFacade.redirectUrl || '']);
-      //     } else {
-      //       this.router.navigate(['dashboard']);
-      //     }
-      //   },
-      // });
+      this.authenticationAPIService.login(userCredential).subscribe({
+        next: () => {
+          if (this.authenticationFacade.redirectUrl.includes('dashboard')) {
+            this.router.navigate([this.authenticationFacade.redirectUrl || '']);
+          } else {
+            this.router.navigate(['dashboard']);
+          }
+        },
+      });
     }
   }
 

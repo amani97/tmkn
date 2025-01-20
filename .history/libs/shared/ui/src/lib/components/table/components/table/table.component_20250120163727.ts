@@ -24,7 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Pagination } from '../../../paginator/models/pagination.model';
-import { SelectionModel } from '@angular/cdk/collections';
+import {SelectionModel} from '@angular/cdk/collections';
 import { TmEmptyDataComponent } from '../../../empty-data/components/tm-empty-data/tm-empty-data.component';
 import { TmFormFieldModule } from '../../../form-field/form-field.module';
 import { TmPaginatorComponent } from '../../../paginator/components/paginator.component';
@@ -111,11 +111,11 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
   }
 
   ngAfterContentInit(): void {
-    this.displayedColumns = [
-      'select',
-      ...this.metaData().columns.map((c) => c.columnDef),
-      'actions',
-    ];
+displayedColumns = [
+  'select',
+  ...this.columns.map((c) => c.columnDef),
+  'actions',
+];
     this.displayedColumns.push('actions');
     this.data().subscribe((data) => (this.dataSource.data = data));
     if (this.showPagination() && this.paginator && this.pagination()) {

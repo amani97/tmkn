@@ -1,35 +1,33 @@
 import {
   AfterContentInit,
-  CUSTOM_ELEMENTS_SCHEMA,
   Component,
-  EventEmitter,
-  OnChanges,
-  Output,
   ViewChild,
+  EventEmitter,
+  Output,
+  CUSTOM_ELEMENTS_SCHEMA,
   input,
+  OnChanges,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable, lastValueFrom, map, take } from 'rxjs';
-
-import { CdkTableModule } from '@angular/cdk/table';
-import { ColumnStyleOptionsService } from '../../services/column-style-options.service';
 import { ColumnStylesOptions } from '../../models/table-column.model';
+import { Pagination } from '../../../paginator/models/pagination.model';
+import { ColumnStyleOptionsService } from '../../services/column-style-options.service';
 import { CommonModule } from '@angular/common';
-import { DataLoaderComponent } from '../../../loader/components/data-loader/data-loader.component';
-import { MatButtonModule } from '@angular/material/button';
+import { ValueContainerComponent } from '../value-container/value-container.component';
+import { CdkTableModule } from '@angular/cdk/table';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Pagination } from '../../../paginator/models/pagination.model';
-import { SelectionModel } from '@angular/cdk/collections';
+import { DataLoaderComponent } from '../../../loader/components/data-loader/data-loader.component';
 import { TmEmptyDataComponent } from '../../../empty-data/components/tm-empty-data/tm-empty-data.component';
-import { TmFormFieldModule } from '../../../form-field/form-field.module';
 import { TmPaginatorComponent } from '../../../paginator/components/paginator.component';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { TmTableMetaData } from '../../models';
-import { ValueContainerComponent } from '../value-container/value-container.component';
+import { MatButtonModule } from '@angular/material/button';
+import { TmFormFieldModule } from '../../../form-field/form-field.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'tm-ui-table',
@@ -81,7 +79,6 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
   multiplePages$!: Observable<boolean>;
   @ViewChild('paginator', { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  selection = new SelectionModel<any>(true, []); // true for multi-selection
 
   get columns() {
     if (this.metaData()) {
@@ -111,11 +108,7 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
   }
 
   ngAfterContentInit(): void {
-    this.displayedColumns = [
-      'select',
-      ...this.metaData().columns.map((c) => c.columnDef),
-      'actions',
-    ];
+    this.displayedColumns = this.metaData().columns.map((c) => c.columnDef);
     this.displayedColumns.push('actions');
     this.data().subscribe((data) => (this.dataSource.data = data));
     if (this.showPagination() && this.paginator && this.pagination()) {
@@ -160,28 +153,5 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
       return selectedRows.findIndex((r) => r[idKey] === row[idKey]) > -1;
     }
     return false;
-  }
-
-  toggleAllRows(event: any) {
-    if (event.checked) {
-      this.selection.select(...this.dataSource.data);
-    } else {
-      this.selection.clear();
-    }
-  }
-
-  toggleRow(row: any) {
-    this.selection.toggle(row);
-  }
-
-  isAllSelected() {
-    return this.selection.selected.length === this.dataSource.data.length;
-  }
-
-  isSomeSelected() {
-    return (
-      this.selection.selected.length > 0 &&
-      this.selection.selected.length < this.dataSource.data.length
-    );
   }
 }

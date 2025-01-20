@@ -52,7 +52,7 @@ export class LoginComponent {
         userName: this.loginFg?.get('userName')?.value,
         password: this.loginFg?.get('password')?.value,
       };
-      this.router.navigate(['dashboard']);
+      console.log(userCredential)
       // this.authenticationAPIService.login(userCredential).subscribe({
       //   next: () => {
       //     if (this.authenticationFacade.redirectUrl.includes('dashboard')) {

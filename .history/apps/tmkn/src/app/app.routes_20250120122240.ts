@@ -1,4 +1,3 @@
-import {LoginComponent} from 'libs/shared/auth/src/lib/components/login/login.component';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [

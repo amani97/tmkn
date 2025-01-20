@@ -10,9 +10,5 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   imports: [TooltipModule],
 })
 export class TooltipContentComponent {
-  constructor(private excelExportService: ExcelExportService) {}
-
-  exportData() {
-    this.excelExportService.exportToExcel(['this.data'], 'EmployeeData');
-  }
+  constructor(private excelExportService: ExcelExportService){};
 }
