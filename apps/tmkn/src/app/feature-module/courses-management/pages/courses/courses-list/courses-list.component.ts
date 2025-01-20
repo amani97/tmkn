@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { INavigationManagerService } from '@tmkn/core';
+import { Observable, map, of } from 'rxjs';
 import { Pagination, TmDialogType } from '@tmkn/ui';
-import { TmknAppRoutes } from 'apps/tmkn/src/app/shared/config';
-import { CoursesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/courses.service';
+
 import { Course } from 'apps/tmkn/src/app/feature-module/courses-management/model/course.model';
-import { routes } from 'apps/tmkn/src/app/shared/routes/routes';
+import { CoursesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/courses.service';
+import { INavigationManagerService } from '@tmkn/core';
+import { Router } from '@angular/router';
 import { TmConfirmationDialogService } from 'libs/shared/ui/src/lib/components/dialog/services/confirmation-dialog.service';
 import { TmTableMetaData } from 'libs/shared/ui/src/lib/components/table/models';
-import { map, Observable, of } from 'rxjs';
+import { TmknAppRoutes } from 'apps/tmkn/src/app/shared/config';
+import { routes } from 'apps/tmkn/src/app/shared/routes/routes';
 
 @Component({
   selector: 'app-courses-list',
@@ -24,6 +25,7 @@ export class CoursesListComponent {
   private readonly confirmationDialogService = inject(
     TmConfirmationDialogService
   );
+  selectedRows: any[] = []; // Holds selected rows from the table
 
   classes = ['Class 1', 'Class 2', 'Class 3'];
   sections = ['A', 'B', 'C'];
@@ -170,4 +172,8 @@ export class CoursesListComponent {
         }
       });
   };
+
+  updateSelectedRows(rows: any[]) {
+    this.selectedRows = rows; // Update selected rows
+  }
 }

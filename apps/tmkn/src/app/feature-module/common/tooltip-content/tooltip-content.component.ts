@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 import {ExcelExportService} from '../../../shared/services/export.service';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
@@ -10,9 +11,11 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   imports: [TooltipModule],
 })
 export class TooltipContentComponent {
+  @Input() rowsToExport: any[] = []; // Input for selected rows
+
   constructor(private excelExportService: ExcelExportService) {}
 
   exportData() {
-    this.excelExportService.exportToExcel(['this.data'], 'EmployeeData');
+    this.excelExportService.exportToExcel(this.rowsToExport, 'EmployeeData');
   }
 }

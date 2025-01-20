@@ -19,6 +19,7 @@ import { ColumnStylesOptions } from '../../models/table-column.model';
 import { CommonModule } from '@angular/common';
 import { DataLoaderComponent } from '../../../loader/components/data-loader/data-loader.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -52,6 +53,7 @@ import { ValueContainerComponent } from '../value-container/value-container.comp
     MatButtonModule,
     TmFormFieldModule,
     MatMenuModule,
+    MatCheckboxModule,
   ],
   providers: [{ provide: ColumnStyleOptionsService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -71,6 +73,8 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
 
   selectedRows = input<T[]>([]);
   idKey = input<keyof T>('' as keyof T);
+  @Output() selectedRowsChange = new EventEmitter<any[]>();
+
   @Output() paginationChange = new EventEmitter<Pagination>();
 
   dataSource = new MatTableDataSource<T>([]);
@@ -168,10 +172,13 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
     } else {
       this.selection.clear();
     }
+
+    this.emitSelectedRows();
   }
 
   toggleRow(row: any) {
     this.selection.toggle(row);
+    this.emitSelectedRows();
   }
 
   isAllSelected() {
@@ -183,5 +190,9 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
       this.selection.selected.length > 0 &&
       this.selection.selected.length < this.dataSource.data.length
     );
+  }
+
+  emitSelectedRows() {
+    this.selectedRowsChange.emit(this.selection.selected); // Emit current selection
   }
 }

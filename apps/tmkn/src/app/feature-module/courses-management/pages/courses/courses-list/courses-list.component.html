@@ -7,7 +7,7 @@
       (clickPrevButton)="onClickPrevButton()"
     >
       <ng-container class="actions-container">
-        <app-tooltip-content />
+        <app-tooltip-content [rowsToExport]="selectedRows" />
         <div class="mb-2">
           <a
             [routerLink]="addBtnLink"
@@ -32,6 +32,8 @@
       [showAddButton]="true"
       [addButtonTitle]="'Add new'"
       [addButtonLink]="'./'"
+        (selectedRowsChange)="updateSelectedRows($event)"
+
     >
       <ng-container class="filter-actions">
         <div class="d-flex gap-3">
