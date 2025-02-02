@@ -49,3 +49,5 @@ Thumbs.db
 *~
 # Ignore VS Code specific backups
 *.code-workspace~
+
+.history

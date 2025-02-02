@@ -1,15 +1,17 @@
 import {
   AfterContentInit,
-  Component,
-  ViewChild,
-  EventEmitter,
-  Output,
   CUSTOM_ELEMENTS_SCHEMA,
-  input,
+  Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
+  ViewChild,
+  input,
 } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   Observable,
@@ -20,22 +22,6 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { ColumnStylesOptions } from '../../models/table-column.model';
-import { Pagination } from '../../../paginator/models/pagination.model';
-import { ColumnStyleOptionsService } from '../../services/column-style-options.service';
-import { CommonModule } from '@angular/common';
-import { ValueContainerComponent } from '../value-container/value-container.component';
-import { CdkTableModule } from '@angular/cdk/table';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { DataLoaderComponent } from '../../../loader/components/data-loader/data-loader.component';
-import { TmEmptyDataComponent } from '../../../empty-data/components/tm-empty-data/tm-empty-data.component';
-import { TmPaginatorComponent } from '../../../paginator/components/paginator.component';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { TmTableMetaData } from '../../models';
-import { MatButtonModule } from '@angular/material/button';
-import { TmFormFieldModule } from '../../../form-field/form-field.module';
 import {
   animate,
   state,
@@ -43,7 +29,25 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+
+import { CdkTableModule } from '@angular/cdk/table';
+import { ColumnStyleOptionsService } from '../../services/column-style-options.service';
+import { ColumnStylesOptions } from '../../models/table-column.model';
+import { CommonModule } from '@angular/common';
+import { DataLoaderComponent } from '../../../loader/components/data-loader/data-loader.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Pagination } from '../../../paginator/models/pagination.model';
+import {SelectionModel} from '@angular/cdk/collections';
+import { TmEmptyDataComponent } from '../../../empty-data/components/tm-empty-data/tm-empty-data.component';
+import { TmFormFieldModule } from '../../../form-field/form-field.module';
+import { TmPaginatorComponent } from '../../../paginator/components/paginator.component';
+import { TmTableMetaData } from '../../models';
+import { ValueContainerComponent } from '../value-container/value-container.component';
 
 @Component({
   selector: 'tm-ui-tree-table',
@@ -66,6 +70,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     TmFormFieldModule,
     MatMenuModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [{ provide: ColumnStyleOptionsService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -102,6 +109,7 @@ export class TmTreeTableComponent<T, G, E>
   selectedRows = input<T[]>([]);
   idKey = input<keyof T>('' as keyof T);
   @Output() paginationChange = new EventEmitter<Pagination>();
+  @Output() selectedRowsChange = new EventEmitter<any[]>();
 
   dataSource = new MatTableDataSource<T>([]);
   displayedColumns: string[] = ['expand-icon'];
@@ -113,6 +121,7 @@ export class TmTreeTableComponent<T, G, E>
   multiplePages$!: Observable<boolean>;
   @ViewChild('paginator', { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  selection = new SelectionModel<any>(true, []); // true for multi-selection
 
   get columns() {
     if (this.metaData()) {
@@ -184,7 +193,8 @@ export class TmTreeTableComponent<T, G, E>
   }
 
   ngAfterContentInit(): void {
-    this.displayedColumns = [
+    this.displayedColumns=[
+      'select',
       'expand-icon',
       ...this.metaData().columns.map((c) => c.columnDef),
     ];
@@ -233,15 +243,6 @@ export class TmTreeTableComponent<T, G, E>
     }
   }
 
-  isRowSelected(row: T): boolean {
-    const selectedRows = this.selectedRows();
-    const idKey = this.idKey();
-    if (selectedRows) {
-      return selectedRows.findIndex((r) => r[idKey] === row[idKey]) > -1;
-    }
-    return false;
-  }
-
   toggleRow(row: any, level: string): void {
     if (row.expanded) {
       row.expanded = false; // Collapse
@@ -260,5 +261,50 @@ export class TmTreeTableComponent<T, G, E>
           .subscribe();
       }
     }
+  }
+  // toggleSelectAll(checked: boolean) {
+  //   this.dataSource.data.forEach((row) => {
+  //     (row as any).selected = checked;
+  //   });
+  //   console.log(this.dataSource.data);
+  // }
+
+  isRowSelected(row: T): boolean {
+    const selectedRows = this.selectedRows();
+    const idKey = this.idKey();
+    if (selectedRows) {
+      return selectedRows.findIndex((r) => r[idKey] === row[idKey]) > -1;
+    }
+    return false;
+  }
+
+  isAllSelected() {
+    return this.selection.selected.length === this.dataSource.data.length;
+  }
+
+  isSomeSelected() {
+    return (
+      this.selection.selected.length > 0 &&
+      this.selection.selected.length < this.dataSource.data.length
+    );
+  }
+
+  toggleAllRows(event: any) {
+    if (event.checked) {
+      this.selection.select(...this.dataSource.data);
+    } else {
+      this.selection.clear();
+    }
+
+    this.emitSelectedRows();
+  }
+
+  emitSelectedRows() {
+    this.selectedRowsChange.emit(this.selection.selected); // Emit current selection
+  }
+
+  toggleSelectedRow(row: any) {
+    this.selection.toggle(row);
+    this.emitSelectedRows();
   }
 }

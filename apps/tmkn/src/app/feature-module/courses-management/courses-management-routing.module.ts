@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TmknAppRoutes } from '../../shared/config';
-import { CoursesListComponent } from './pages/courses/courses-list/courses-list.component';
+
 import { CourseFormComponent } from './pages/courses/course-form/course-form.component';
-import { SubCoursesListComponent } from './pages/sub-courses/sub-courses-list/sub-courses-list.component';
+import { CoursesListComponent } from './pages/courses/courses-list/courses-list.component';
 import { CoursesManagementContainerComponent } from './components/courses-management-container/courses-management-container.component';
+import { NgModule } from '@angular/core';
+import { SubCoursesListComponent } from './pages/sub-courses/sub-courses-list/sub-courses-list.component';
+import { TmknAppRoutes } from '../../shared/config';
 
 const COURSE_MANAGEMENT_PAGES = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
       breadcrumb: 'Edit Course',
     },
   },
+ 
 ];
 
 @NgModule({

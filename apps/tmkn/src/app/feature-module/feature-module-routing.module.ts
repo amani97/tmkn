@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeatureModuleComponent } from './feature-module.component';
+
 import { AdminDashboardComponent } from './main/dashboard/admin-dashboard/admin-dashboard.component';
+import { FeatureModuleComponent } from './feature-module.component';
+import { NgModule } from '@angular/core';
 import { TmknAppRoutes } from '../shared/config';
 
 const routes: Routes = [
@@ -37,6 +38,13 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Course Management',
         },
+      },
+      {
+        path: `${TmknAppRoutes.Dashboard}/${TmknAppRoutes.Examinations}`,
+        loadChildren: () =>
+          import('./examinations/examinations.module').then(
+            (m) => m.ExaminationsModule
+          ),
       },
       { path: 'layout-mini', component: AdminDashboardComponent },
       { path: 'layout-default', component: AdminDashboardComponent },

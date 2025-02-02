@@ -1,0 +1,53 @@
+[
+  {
+    "id": "11",
+    "class": "10A",
+    "section": "A",
+    "examName": "Midterm Exam",
+    "startTime": "09:00 AM",
+    "endTime": "11:00 AM",
+    "duration": 120,
+    "examDate": "2025-03-15",
+    "subject": "Mathematics",
+    "roomNo": "101",
+    "maxMarks": 100,
+    "minMarks": 40,
+    "questions": [
+      {
+        "questionText": "What is 2 + 2?",
+        "options": ["3", "4", "5", "6"],
+        "correctAnswer": "4"
+      },
+      {
+        "questionText": "Solve for x: 2x = 10",
+        "options": ["2", "5", "10", "20"],
+        "correctAnswer": "5"
+      }
+    ]
+  },
+  {"id":"1",
+    "class": "10B",
+    "section": "B",
+    "examName": "Final Exam",
+    "startTime": "01:00 PM",
+    "endTime": "03:00 PM",
+    "duration": 120,
+    "examDate": "2025-06-20",
+    "subject": "Science",
+    "roomNo": "202",
+    "maxMarks": 100,
+    "minMarks": 35,
+    "questions": [
+      {
+        "questionText": "What is H2O?",
+        "options": ["Oxygen", "Hydrogen", "Water", "Carbon Dioxide"],
+        "correctAnswer": "Water"
+      },
+      {
+        "questionText": "What is the chemical symbol for Gold?",
+        "options": ["Au", "Ag", "Pb", "Fe"],
+        "correctAnswer": "Au"
+      }
+    ]
+  }
+]

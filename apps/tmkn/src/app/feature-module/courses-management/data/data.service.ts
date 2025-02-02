@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { routes } from '../../../shared/routes/routes';
-import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { apiResultFormat } from '../model/pages.model';
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { TmknAppRoutes } from '../../../shared/config';
+import { apiResultFormat } from '../model/pages.model';
+import { routes } from '../../../shared/routes/routes';
 
 @Injectable({
   providedIn: 'root',
@@ -713,6 +714,24 @@ export class DataService {
           showSubRoute: false,
           icon: 'square-rotated-forbid-2',
           route: `${TmknAppRoutes.Dashboard}/${TmknAppRoutes.CourseManagement}`,
+          base: 'class-section',
+          base2: '',
+          base3: '',
+          base4: '',
+          base5: '',
+          base6: '',
+          base7: '',
+          base8: '',
+          base9: '',
+          customSubmenuTwo: false,
+          subRoutes: [],
+        },
+        {
+          menuValue: 'Examination',
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'square-rotated-forbid-2',
+          route: `${TmknAppRoutes.Dashboard}/${TmknAppRoutes.Examinations}`,
           base: 'class-section',
           base2: '',
           base3: '',

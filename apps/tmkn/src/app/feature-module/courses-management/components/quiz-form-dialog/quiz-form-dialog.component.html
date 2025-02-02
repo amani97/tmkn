@@ -10,6 +10,126 @@
     <div class="row">
       <div class="col-lg-12">
         <form [formGroup]="quizFg" *ngIf="quizFg" class="w-100">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label">Class</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Section</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="section">
+                        <mat-option
+                          *ngFor="let option of sectionOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.value }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Start Time</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="startTime">
+                        <mat-option
+                          *ngFor="let option of starttime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>End Time</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="endTime">
+                        <mat-option
+                          *ngFor="let option of endtime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Duration(min)</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="duration">
+                        <mat-option
+                          *ngFor="let option of durationOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Subject</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="subject">
+                        <mat-option
+                          *ngFor="let option of subjectOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3 flex-fill">
+                    <mat-label>Min Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="minMarks">
+                        <mat-option
+                          *ngFor="let option of minMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="isShareable">
+                    Shareable
+                  </mat-checkbox>
+                </div>
+                <div class="col-lg-3 mb-3 d-flex align-items-center">
+                  <mat-checkbox formControlName="isRandomize">
+                    Randomize
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
             <mat-tab>
               <ng-template mat-tab-label>
@@ -47,12 +167,6 @@
                     [formGroup]="quizFg"
                     [fcName]="'image'"
                   ></tm-ui-upload-file>
-                </div>
-
-                <div class="col-lg-3 mb-3 d-flex align-items-center">
-                  <mat-checkbox formControlName="isShareable">
-                    Shareable
-                  </mat-checkbox>
                 </div>
               </div>
             </mat-tab>

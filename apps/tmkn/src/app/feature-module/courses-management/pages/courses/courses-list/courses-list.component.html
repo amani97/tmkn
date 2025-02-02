@@ -1,6 +1,15 @@
 <!-- Page Wrapper -->
 <div class="page-wrapper">
   <div class="content">
+    <div class="column-selection">
+      <mat-checkbox
+        *ngFor="let column of coursesMetaData.columns"
+        [checked]="selectedColumns.includes(column)"
+        (change)="toggleColumn(column, $event)"
+      >
+        {{ column.header }}
+      </mat-checkbox>
+    </div>
     <tm-ui-main-header-title
       [mainTitle]="'courses.list' | translate"
       [showPrevButton]="false"
@@ -20,10 +29,12 @@
       </ng-container>
     </tm-ui-main-header-title>
 
-    <tm-ui-table
+    <tm-ui-tree-table
       [metaData]="coursesMetaData"
-      [title]="'courses.list' | translate"
+      [metaDataLevelTwo]="subCoursesMetaData"
+      [metaDataLevelThree]="lectureMetaData"
       [data]="courses$"
+      [fetchChildData]="fetchChildData"
       [pagination]="pagination$"
       [showSort]="true"
       [showPagination]="true"
@@ -32,8 +43,7 @@
       [showAddButton]="true"
       [addButtonTitle]="'Add new'"
       [addButtonLink]="'./'"
-        (selectedRowsChange)="updateSelectedRows($event)"
-
+      (selectedRowsChange)="updateSelectedRows($event)"
     >
       <ng-container class="filter-actions">
         <div class="d-flex gap-3">
@@ -140,6 +150,6 @@
           </mat-menu>
         </div>
       </ng-container>
-    </tm-ui-table>
+    </tm-ui-tree-table>
   </div>
 </div>

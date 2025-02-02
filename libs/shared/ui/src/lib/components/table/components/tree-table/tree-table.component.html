@@ -26,6 +26,22 @@
       multiTemplateDataRows
       (matSortChange)="sortData($event)"
     >
+      
+     <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="toggleAllRows($event)"
+              [checked]="isAllSelected()"
+              [indeterminate]="isSomeSelected()"
+            ></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (change)="toggleSelectedRow(row)"
+              [checked]="selection.isSelected(row)"
+            ></mat-checkbox>
+          </td>
+        </ng-container>
       <ng-container matColumnDef="expand-icon">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">

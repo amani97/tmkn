@@ -1,0 +1,930 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content">
+    <!-- Page Header -->
+    <div
+      class="d-md-flex d-block align-items-center justify-content-between mb-3"
+    >
+      <div class="my-auto mb-2">
+        <h3 class="page-title mb-1">Exam</h3>
+        <nav>
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <a [routerLink]="routes.adminDashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0);">Academic </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Exam</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
+        <app-tooltip-content></app-tooltip-content>
+        <div class="mb-2">
+          <button
+          (click)="open()"
+            class="btn btn-primary"
+          
+            ><i class="ti ti-square-rounded-plus-filled me-2"></i>Add Exam</button
+          >
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Guardians List -->
+    <div class="card">
+      <div
+        class="card-header d-flex align-items-center justify-content-between flex-wrap pb-0"
+      >
+        <h4 class="mb-3">Exam List</h4>
+        <div class="d-flex align-items-center flex-wrap">
+          <div class="input-icon-start mb-3 me-2 position-relative">
+            <app-date-range-picker></app-date-range-picker>
+          </div>
+          <div class="dropdown mb-3 me-2">
+            <a
+              href="javascript:void(0);"
+              class="btn btn-outline-light bg-white dropdown-toggle"
+              data-bs-toggle="dropdown"
+              data-bs-auto-close="outside"
+              ><i class="ti ti-filter me-2"></i>Filter</a
+            >
+            <div class="dropdown-menu drop-width">
+              <form>
+                <div class="d-flex align-items-center border-bottom p-3">
+                  <h4>Filter</h4>
+                </div>
+                <div class="p-3 border-bottom pb-0">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <p-dropdown
+                          [options]="[
+                            { label: 'Select ', value: '1' },
+                            { label: 'Class', value: '2' }
+                          ]"
+                          placeholder="Select"
+                          class="select"
+                        ></p-dropdown>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <p-dropdown
+                          [options]="[
+                            { label: 'Active', value: '1' },
+                            { label: 'Inactive', value: '2' }
+                          ]"
+                          placeholder="Select"
+                          class="select"
+                        ></p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-3 d-flex align-items-center justify-content-end">
+                  <a href="javascript:void(0);" class="btn btn-light me-3"
+                    >Reset</a
+                  >
+                  <a
+                    href="javascript:void(0);"
+                    (click)="handleApplyClick()"
+                    class="btn btn-primary"
+                    >Apply</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="dropdown mb-3">
+            <a
+              href="javascript:void(0);"
+              class="btn btn-outline-light bg-white dropdown-toggle"
+              data-bs-toggle="dropdown"
+              ><i class="ti ti-sort-ascending-2 me-2"></i>Sort by A-Z
+            </a>
+            <ul class="dropdown-menu p-3">
+              <li>
+                <a
+                  href="javascript:void(0);"
+                  class="dropdown-item rounded-1 active"
+                >
+                  Ascending
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                  Descending
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                  Recently Viewed
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                  Recently Added
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0 py-3">
+        <!-- Guardians List -->
+        <div class="table-top px-3">
+          <div class="row">
+            <div class="col-sm-12 col-md-6"></div>
+            <div class="col-sm-12 col-md-6">
+              <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                <label>
+                  <input
+                    [(ngModel)]="searchDataValue"
+                    [ngModelOptions]="{ standalone: true }"
+                    (ngModelChange)="searchData(searchDataValue)"
+                    type="search"
+                    class="form-control"
+                    placeholder="Search..."
+                /></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-datatable-filter table-responsive">
+          <table
+            (matSortChange)="sortData($event)"
+            matSort
+            matSortActive="Sno"
+            matSortDirection="asc"
+            matSortDisableClear
+            class="table datatable"
+          >
+            <thead class="thead-light">
+              <tr>
+                
+                <th mat-sort-header="id">ID</th>
+                <th mat-sort-header="examName">Exam Name</th>
+                <th mat-sort-header="examDate">Exam Date</th>
+                <th mat-sort-header="startTime">Start Time</th>
+                <th mat-sort-header="endTime">End Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (table of tableData; track table.id) {
+              <tr>
+                
+                <td>
+                  <a href="javascript:void(0);" class="link-primary">{{
+                    table.id
+                  }}</a>
+                </td>
+                <td>{{ table.examName }}</td>
+                <td>{{ table.examDate }}</td>
+                <td>{{ table.startTime }}</td>
+                <td>{{ table.endTime }}</td>
+
+                <td>
+                  <div class="dropdown">
+                    <a
+                      href="javascript:void(0);"
+                      class="btn btn-white btn-icon btn-sm d-flex align-items-center justify-content-center rounded-circle p-0"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots-vertical fs-14"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right p-3">
+                      <li>
+                        <a
+                          class="dropdown-item rounded-1"
+                          href="javascript:void(0);"
+                          data-bs-toggle="modal"
+                          data-bs-target="#edit_exam"
+                          ><i class="ti ti-edit-circle me-2"></i>Edit</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item rounded-1"
+                          href="javascript:void(0);"
+                          data-bs-toggle="modal"
+                          data-bs-target="#delete-modal"
+                          ><i class="ti ti-trash-x me-2"></i>Delete</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              } @if (tableData.length === 0) {
+              <tr>
+                <td colspan="7">
+                  <h5 class="no-record text-center">No records found</h5>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+        <!-- /Guardians List -->
+      </div>
+    </div>
+    <!-- /Guardians List -->
+  </div>
+</div>
+<!-- /Page Wrapper -->
+<!-- Add Exam -->
+<div class="modal fade" id="add_exam">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Exam Schedule</h4>
+        <button
+          type="button"
+          class="btn-close custom-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <form [formGroup]="examFg" *ngIf="examFg">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label">Class</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Section</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="Section">
+                        <mat-option
+                          *ngFor="let option of sectionOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.value }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Exam Name</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examName">
+                        <mat-option
+                          *ngFor="let option of examNameOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.value }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                      <mat-label>Start Time</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="starttime">
+                        <mat-option
+                          *ngFor="let option of starttime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                     <mat-label>End Time</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="endtime">
+                        <mat-option
+                          *ngFor="let option of endtime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                   
+                     <mat-label>Duration(min)</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="duration">
+                        <mat-option
+                          *ngFor="let option of durationOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exam-schedule-add">
+            <div
+              class="exam-schedule-row d-flex align-items-center flex-wrap column-gap-3"
+            >
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                    <mat-label>Exam Date</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examDate">
+                        <mat-option
+                          *ngFor="let option of examDateOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                   <mat-label>Subject</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="subject">
+                        <mat-option
+                          *ngFor="let option of subjectOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                 
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                   <mat-label>Room No</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="roomNo">
+                        <mat-option
+                          *ngFor="let option of roomNoOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Max Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="maxMarks">
+                        <mat-option
+                          *ngFor="let option of maxMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="d-flex align-items-end">
+                  <div class="mb-3 flex-fill">
+                    
+                     <mat-label>Min Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="minMarks">
+                        <mat-option
+                          *ngFor="let option of minMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="mb-3 ms-2">
+                    <a href="javascript:void(0);" class="delete-schedule-table"
+                      ><i class="ti ti-trash"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @for (item of formData; track item; let i = $index) {
+            <div
+              class="exam-schedule-row d-flex align-items-center flex-wrap column-gap-3"
+            >
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Exam Date</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examDate">
+                        <mat-option
+                          *ngFor="let option of examDateOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                 <mat-label>Subject</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="subject">
+                        <mat-option
+                          *ngFor="let option of subjectOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Room No</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="roomNo">
+                        <mat-option
+                          *ngFor="let option of roomNoOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                   <mat-label>Max Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="maxMarks">
+                        <mat-option
+                          *ngFor="let option of maxMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="d-flex align-items-end">
+                  <div class="mb-3 flex-fill">
+                     <mat-label>Min Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="minMarks">
+                        <mat-option
+                          *ngFor="let option of minMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="mb-3 ms-2">
+                    <a
+                      href="javascript:void(0);"
+                      (click)="removeRow(i)"
+                      class="delete-schedule-table"
+                      ><i class="ti ti-trash"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div>
+            <a
+              href="javascript:void(0);"
+              (click)="addNewRow()"
+              class="btn btn-primary add-new-schedule"
+              ><i class="ti ti-square-rounded-plus-filled me-2"></i>Add New</a
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a
+            href="javascript:void(0);"
+            class="btn btn-light me-2"
+            data-bs-dismiss="modal"
+            >Cancel</a
+          >
+          <button type="button" data-bs-dismiss="modal" class="btn btn-primary">
+            Add Exam Schedule
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Add Exam Schedule -->
+
+<!-- Edit Exam Schedule -->
+<div class="modal fade" id="edit_exam">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Exam Schedule</h4>
+        <button
+          type="button"
+          class="btn-close custom-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <form [formGroup]="examFg" *ngIf="examFg">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label">Class</label>
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                 <mat-label>Section</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="Section">
+                        <mat-option
+                          *ngFor="let option of sectionOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.value }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                   <mat-label>Exam Name</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examName">
+                        <mat-option
+                          *ngFor="let option of examNameOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.value }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Start Time</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="starttime">
+                        <mat-option
+                          *ngFor="let option of starttime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                   <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="endtime">
+                        <mat-option
+                          *ngFor="let option of endtime"
+                          [value]="option.code"
+                        >
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <mat-label>Duration(min)</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="duration">
+                        <mat-option
+                          *ngFor="let option of durationOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="exam-schedule-add">
+            <div
+              class="exam-schedule-row d-flex align-items-center flex-wrap column-gap-3"
+            >
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Exam Date</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examDate">
+                        <mat-option
+                          *ngFor="let option of examDateOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+              <mat-label>Subject</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="subject">
+                        <mat-option
+                          *ngFor="let option of subjectOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Room No</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="roomNo">
+                        <mat-option
+                          *ngFor="let option of roomNoOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Max Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="maxMarks">
+                        <mat-option
+                          *ngFor="let option of maxMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="d-flex align-items-end">
+                  <div class="mb-3 flex-fill">
+                    <mat-label>Min Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="minMarks">
+                        <mat-option
+                          *ngFor="let option of minMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="mb-3 ms-2">
+                    <a href="javascript:void(0);" class="delete-schedule-table"
+                      ><i class="ti ti-trash"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @for (item of formData; track item; let i = $index) {
+            <div
+              class="exam-schedule-row d-flex align-items-center flex-wrap column-gap-3"
+            >
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+               <mat-label>Exam Date</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="examDate">
+                        <mat-option
+                          *ngFor="let option of examDateOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+               <mat-label>Subject</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="subject">
+                        <mat-option
+                          *ngFor="let option of subjectOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                <mat-label>Room No</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="roomNo">
+                        <mat-option
+                          *ngFor="let option of roomNoOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="mb-3">
+                  <mat-label>Max Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="maxMarks">
+                        <mat-option
+                          *ngFor="let option of maxMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="shedule-info flex-fill">
+                <div class="d-flex align-items-end">
+                  <div class="mb-3 flex-fill">
+                    <mat-label>Min Marks</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-select formControlName="minMarks">
+                        <mat-option
+                          *ngFor="let option of minMarksOptions"
+                          [value]="option.value"
+                        >
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error tmUiFormErrorMessages></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="mb-3 ms-2">
+                    <a
+                      href="javascript:void(0);"
+                      (click)="removeRow(i)"
+                      class="delete-schedule-table"
+                      ><i class="ti ti-trash"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <div>
+            <a
+              href="javascript:void(0);"
+              (click)="addNewRow()"
+              class="btn btn-primary add-new-schedule"
+              ><i class="ti ti-square-rounded-plus-filled me-2"></i>Add New</a
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a
+            href="javascript:void(0);"
+            class="btn btn-light me-2"
+            data-bs-dismiss="modal"
+            >Cancel</a
+          >
+          <button type="button" data-bs-dismiss="modal" class="btn btn-primary">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Edit Exam Schedule -->
+<!-- Delete Modal -->
+<div class="modal fade" id="delete-modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form>
+        <div class="modal-body text-center">
+          <span class="delete-icon">
+            <i class="ti ti-trash-x"></i>
+          </span>
+          <h4>Confirm Deletion</h4>
+          <p>
+            You want to delete all the marked items, this cant be undone once
+            you delete.
+          </p>
+          <div class="d-flex justify-content-center">
+            <a
+              href="javascript:void(0);"
+              class="btn btn-light me-3"
+              data-bs-dismiss="modal"
+              >Cancel</a
+            >
+            <a
+              href="javascript:void(0);"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              >Yes, Delete</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

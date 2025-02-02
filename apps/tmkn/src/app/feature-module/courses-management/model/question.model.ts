@@ -13,6 +13,16 @@ export interface QuizModel {
   isShareable: boolean;
   file: string;
   type: MediaContentType;
+  class: string;
+  section: string;
+  examName: string;
+  startTime: string;
+  endTime: string;
+  examDate: string;
+  subject: string;
+  roomNo: number;
+  maxMarks: number;
+  minMarks: number;
 }
 export interface QuestionModel {
   id: number;

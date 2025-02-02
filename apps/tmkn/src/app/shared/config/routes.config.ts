@@ -86,8 +86,9 @@ export enum TmknAppRoutes {
   // Actions
   Add = 'add',
   Edit = 'edit',
-  Details= 'details',
+  Details = 'details',
 
   Auth = 'auth',
   Logout = 'logout',
+  Examinations = 'Examinations',
 }

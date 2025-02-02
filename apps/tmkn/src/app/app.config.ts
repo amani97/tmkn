@@ -3,18 +3,19 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { appRoutes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { TranslationModule } from '@tmkn/translations';
-import { provideHttpClient } from '@angular/common/http';
 import { AuthConfig, TmAuthModule } from '@tmkn/auth';
-import { environment } from '../environments/environment.prod';
 import { CoreConfig, CoreModule } from '@tmkn/core';
-import { SharedModule } from './shared/shared.module';
-import { providePrimeNG } from 'primeng/config';
+
 import Aura from '@primeng/themes/aura';
+import { SharedModule } from './shared/shared.module';
 import { TmknLangs } from './shared/config';
+import { TranslationModule } from '@tmkn/translations';
+import { appRoutes } from './app.routes';
+import { environment } from '../environments/environment.prod';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
+import { providePrimeNG } from 'primeng/config';
+import { provideRouter } from '@angular/router';
 
 const authConfig: AuthConfig = {
   baseUrl: environment.AUTH__BASE_URL,
@@ -46,9 +47,8 @@ export const appConfig: ApplicationConfig = {
     ),
     providePrimeNG({
       theme: {
-          preset: Aura
-      }
-  })
-
+        preset: Aura,
+      },
+    }),
   ],
 };

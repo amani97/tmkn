@@ -1,30 +1,31 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { INavigationManagerService } from '@tmkn/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Observable, map, of } from 'rxjs';
 import { Pagination, TmDialogType } from '@tmkn/ui';
-import { TmknAppRoutes } from 'apps/tmkn/src/app/shared/config';
-import { TmTableMetaData } from 'libs/shared/ui/src/lib/components/table/models';
-import { map, Observable, of } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { QuestionsFormDialogComponent } from '../../../components/questions-form-dialog/questions-form-dialog.component';
-import { SubCoursesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/sub-courses.service';
-import { LecturesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/lectures.service';
-import { MediaContentsService } from 'apps/tmkn/src/app/feature-module/courses-management/data/media-contents.service';
-import { Lecture } from 'apps/tmkn/src/app/feature-module/courses-management/model/lecture.model';
-import { SubCourse } from 'apps/tmkn/src/app/feature-module/courses-management/model/sub-course.model';
-import { MediaContent } from 'apps/tmkn/src/app/feature-module/courses-management/model/media-content.model';
+
 import { CourseManagementType } from 'apps/tmkn/src/app/shared/enums/course-management-type.enum';
+import { INavigationManagerService } from '@tmkn/core';
+import { Lecture } from 'apps/tmkn/src/app/feature-module/courses-management/model/lecture.model';
+import { LectureFormDialogComponent } from '../../../components/lecture-form-dialog/lecture-form-dialog.component';
+import { LecturesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/lectures.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MediaContent } from 'apps/tmkn/src/app/feature-module/courses-management/model/media-content.model';
 import { MediaContentType } from 'apps/tmkn/src/app/shared/enums/media-content-type.enum';
-import { VideoFormDialogComponent } from '../../../components/video-form-dialog/video-form-dialog.component';
-import { VideoStreamsFormDialogComponent } from '../../../components/video-streams-form-dialog/video-streams-form-dialog.component';
+import { MediaContentsService } from 'apps/tmkn/src/app/feature-module/courses-management/data/media-contents.service';
 import { NoteFormDialogComponent } from '../../../components/note-form-dialog/note-form-dialog.component';
 import { OtherFileFormDialogComponent } from '../../../components/other-file-dialog/other-file-dialog.component';
 import { PaperNoteFormDialogComponent } from '../../../components/paper-note-form-dialog/paper-note-form-dialog.component';
-import { ServiceFormDialogComponent } from '../../../components/service-form-dialog/service-form-dialog.component';
-import { SubCourseFormDialogComponent } from '../../../components/sub-course-form-dialog/sub-course-form-dialog.component';
-import { TmConfirmationDialogService } from 'libs/shared/ui/src/lib/components/dialog/services/confirmation-dialog.service';
+import { QuestionsFormDialogComponent } from '../../../components/questions-form-dialog/questions-form-dialog.component';
 import { QuizFormDialogComponent } from '../../../components/quiz-form-dialog/quiz-form-dialog.component';
-import { LectureFormDialogComponent } from '../../../components/lecture-form-dialog/lecture-form-dialog.component';
+import { Router } from '@angular/router';
+import { ServiceFormDialogComponent } from '../../../components/service-form-dialog/service-form-dialog.component';
+import { SubCourse } from 'apps/tmkn/src/app/feature-module/courses-management/model/sub-course.model';
+import { SubCourseFormDialogComponent } from '../../../components/sub-course-form-dialog/sub-course-form-dialog.component';
+import { SubCoursesService } from 'apps/tmkn/src/app/feature-module/courses-management/data/sub-courses.service';
+import { TmConfirmationDialogService } from 'libs/shared/ui/src/lib/components/dialog/services/confirmation-dialog.service';
+import { TmTableMetaData } from 'libs/shared/ui/src/lib/components/table/models';
+import { TmknAppRoutes } from 'apps/tmkn/src/app/shared/config';
+import { VideoFormDialogComponent } from '../../../components/video-form-dialog/video-form-dialog.component';
+import { VideoStreamsFormDialogComponent } from '../../../components/video-streams-form-dialog/video-streams-form-dialog.component';
 
 @Component({
   selector: 'app-sub-courses-list',
@@ -102,13 +103,7 @@ export class SubCoursesListComponent {
             ? true
             : false,
       },
-      {
-        icon: 'ti ti-eye',
-        color: 'primary',
-        title: 'Show details',
-        action: () => {},
-        visibleCondition: () => true,
-      },
+    
       {
         icon: 'ti ti-edit',
         color: 'accent',
@@ -173,13 +168,7 @@ export class SubCoursesListComponent {
       },
     ],
     actions: [
-      {
-        icon: 'ti ti-eye',
-        color: 'primary',
-        title: 'Show details',
-        action: () => {},
-        visibleCondition: () => true,
-      },
+      
       {
         icon: 'ti ti-edit',
         color: 'accent',

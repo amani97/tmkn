@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { BaseFormGroupService, IFormArrayService } from '@tmkn/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { BaseFormGroupService, IFormArrayService } from '@tmkn/core';
-import { QuizModel } from '../model/question.model';
+
+import { Injectable } from '@angular/core';
 import { QuestionFormGroupService } from './question-from-group.service';
+import { QuizModel } from '../model/question.model';
 
 @Injectable()
 export class QuizFormGroupService extends BaseFormGroupService<QuizModel> {
@@ -21,6 +22,39 @@ export class QuizFormGroupService extends BaseFormGroupService<QuizModel> {
 
   protected build(initialValue?: QuizModel): FormGroup {
     const fg = this.fb.group({
+      class: new FormControl<string | undefined>(initialValue?.class, {
+        validators: [Validators.required],
+      }),
+      section: new FormControl<string | undefined>(initialValue?.section, {
+        validators: [Validators.required],
+      }),
+      examName: new FormControl<string | undefined>(initialValue?.examName, {
+        validators: [Validators.required],
+      }),
+      startTime: new FormControl<string | undefined>(initialValue?.startTime, {
+        validators: [Validators.required],
+      }),
+      endTime: new FormControl<string | undefined>(initialValue?.endTime, {
+        validators: [Validators.required],
+      }),
+      duration: new FormControl<number | undefined>(initialValue?.duration, {
+        validators: [Validators.required],
+      }),
+      examDate: new FormControl<string | undefined>(initialValue?.examDate, {
+        validators: [Validators.required],
+      }),
+      subject: new FormControl<string | undefined>(initialValue?.subject, {
+        validators: [Validators.required],
+      }),
+      roomNo: new FormControl<number | undefined>(initialValue?.roomNo, {
+        validators: [Validators.required],
+      }),
+      maxMarks: new FormControl<number | undefined>(initialValue?.maxMarks, {
+        validators: [Validators.required],
+      }),
+      minMarks: new FormControl<number | undefined>(initialValue?.minMarks, {
+        validators: [Validators.required],
+      }),
       title: new FormControl<string | undefined>(initialValue?.title, {
         validators: [Validators.required],
       }),
@@ -40,9 +74,7 @@ export class QuizFormGroupService extends BaseFormGroupService<QuizModel> {
           validators: [Validators.required],
         }
       ),
-      duration: new FormControl<number | undefined>(initialValue?.duration, {
-        validators: [Validators.required],
-      }),
+    
       isRandomize: new FormControl<boolean | undefined>(
         initialValue?.isRandomize,
         {
@@ -60,8 +92,9 @@ export class QuizFormGroupService extends BaseFormGroupService<QuizModel> {
       ),
       questions: this.fb.array([]),
     });
-    if (initialValue?.questions && initialValue?.questions.length > 0) {
-      initialValue?.questions.forEach((question) => {
+
+    if (initialValue?.questions && initialValue.questions.length > 0) {
+      initialValue.questions.forEach((question) => {
         this.formArrayService.addItemToFormArray(
           'questions',
           fg,
