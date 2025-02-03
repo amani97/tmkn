@@ -120,7 +120,6 @@ export class TmTableComponent<T> implements AfterContentInit, OnChanges {
       ...this.metaData().columns.map((c) => c.columnDef),
       'actions',
     ];
-    this.displayedColumns.push('actions');
     this.data().subscribe((data) => (this.dataSource.data = data));
     if (this.showPagination() && this.paginator && this.pagination()) {
       this.paginationTotalCount$ = this.pagination().pipe(

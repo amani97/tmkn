@@ -1,6 +1,8 @@
 [
   {
     "id": "11",
+    "title": "test exam",
+
     "class": "10A",
     "section": "A",
     "examName": "Midterm Exam",
@@ -26,6 +28,7 @@
     ]
   },
   {"id":"1",
+  "title":"test exam",
     "class": "10B",
     "section": "B",
     "examName": "Final Exam",

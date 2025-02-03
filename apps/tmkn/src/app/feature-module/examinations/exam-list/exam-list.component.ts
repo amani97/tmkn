@@ -1,25 +1,23 @@
 import { Component, Renderer2 } from '@angular/core';
+import { Observable, map, of } from 'rxjs';
 import {
   PaginationService,
   tablePageSize,
 } from '../../../shared/custom-pagination/pagination.service';
-import {
-  apiResultFormat,
-  examData,
-  pageSelection,
-} from '../../courses-management/model/pages.model';
 
 import { DataService } from '../../courses-management/data/data.service';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Pagination } from '@tmkn/ui';
+import { QuestionsFormDialogComponent } from '../../courses-management/components/questions-form-dialog/questions-form-dialog.component';
+import { QuizFormDialogComponent } from '../../courses-management/components/quiz-form-dialog/quiz-form-dialog.component';
+import { QuizModel } from '../../courses-management/model/question.model';
+import { QuizService } from '../../courses-management/data/quiz.service';
 import { Router } from '@angular/router';
 import { Sort } from '@angular/material/sort';
+import { TmTableMetaData } from 'libs/shared/ui/src/lib/components/table/models';
+import { pageSelection } from '../../courses-management/model/pages.model';
 import { routes } from '../../../shared/routes/routes';
-import {FormGroup} from '@angular/forms';
-import {QuestionsFormDialogComponent} from '../../courses-management/components/questions-form-dialog/questions-form-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {QuizFormDialogComponent} from '../../courses-management/components/quiz-form-dialog/quiz-form-dialog.component';
-import {QuizService} from '../../courses-management/data/quiz.service';
-import {QuizModel} from '../../courses-management/model/question.model';
 
 interface data {
   name: string;
@@ -34,12 +32,7 @@ interface data {
 })
 export class ExamListComponent {
   public routes = routes;
-  starttime: data[] | undefined;
-  selectedEndtime: data | undefined;
-  selectedEndtime1: data | undefined;
-  endtime: data[] | undefined;
-  selectedStarttime: data | undefined;
-  selectedStarttime1: data | undefined;
+
   type: data[] | undefined;
   selectedType: data | undefined;
   selectedType1: data | undefined;
@@ -63,45 +56,81 @@ export class ExamListComponent {
   public pageSelection: pageSelection[] = [];
   dataSource!: MatTableDataSource<QuizModel>;
   public searchDataValue = '';
-  sectionOptions = [
-    { label: 'A ', value: '1' },
-    { label: 'B', value: '2' },
-    { label: 'C', value: '3' },
-  ];
-  examNameOptions = [
-    { label: 'Week text ', value: '1' },
-    { label: 'Mothly Test', value: '2' },
-    { label: 'Chapter Wise text ', value: '3' },
-    { label: 'Unit Test', value: '4' },
-  ];
-  durationOptions = [
-    { label: 'Select ', value: '1' },
-    { label: '3hrs', value: '2' },
-  ];
-  examDateOptions = [
-    { label: '13 May 2024 ', value: '1' },
-    { label: '14 May 2024', value: '2' },
-    { label: '15 May 2024', value: '3' },
-  ];
-  subjectOptions = [
-    { label: 'English ', value: '1' },
-    { label: 'Spanish', value: '2' },
-    { label: 'Physics', value: '3' },
-  ];
-  roomNoOptions = [
-    { label: '101 ', value: '1' },
-    { label: '102', value: '2' },
-    { label: '103', value: '3' },
-  ];
-  maxMarksOptions = [
-    { label: 'Select ', value: '1' },
-    { label: '100', value: '2' },
-  ];
-  minMarksOptions = [
-    { label: 'Select ', value: '1' },
-    { label: '35', value: '2' },
-  ];
-  examFg!: FormGroup;
+  quiz$!: Observable<QuizModel[]>;
+  loading$!: Observable<boolean>;
+  pagination$: Observable<Pagination> = of(new Pagination(1));
+  coursesMetaData: TmTableMetaData<QuizModel> = {
+    columns: [
+      {
+        columnDef: 'id',
+        header: 'Id',
+        cell: (element: QuizModel) => `${element.id}`,
+        type: 'link',
+      },
+      {
+        columnDef: 'title',
+        header: 'Title',
+        cell: (element: QuizModel) => `${element.title}`,
+      },
+      {
+        columnDef: 'duration',
+        header: 'Duration',
+        cell: (element: QuizModel) => `${element.duration}`,
+      },
+      {
+        columnDef: 'section',
+        header: 'Section',
+        cell: (element: QuizModel) => `${element.section}`,
+      },
+      {
+        columnDef: 'class',
+        header: 'Class',
+        cell: (element: QuizModel) => `${element.class}`,
+      },
+      {
+        columnDef: 'active',
+        header: 'Active',
+        cell: (element: QuizModel) => `${element.isRandomize ? 'Yes' : 'No'}`,
+        type: 'highlighted',
+        highlightedLogic: (element: QuizModel) => {
+          return element.isRandomize ? 'green' : 'red';
+        },
+      },
+      {
+        columnDef: 'accepted',
+        header: 'Accepted',
+        cell: (element: QuizModel) => `${element.isShareable ? 'Yes' : 'No'}`,
+        type: 'highlighted',
+        highlightedLogic: (element: QuizModel) => {
+          return element.isShareable ? 'green' : 'red';
+        },
+      },
+    ],
+    actions: [
+      {
+        icon: 'ti ti-edit',
+        color: 'accent',
+        title: 'Edit',
+        action: (element: QuizModel) => {},
+        visibleCondition: () => true,
+      },
+      {
+        icon: 'ti ti-trash',
+        color: 'warn',
+        title: 'Delete',
+        action: (element: QuizModel) => {},
+        visibleCondition: () => true,
+      },
+      {
+        icon: 'ti ti-question-mark',
+        title: 'Add Questions',
+        color: 'primary',
+        action: (element: QuizModel) => this.addQuestions(),
+        visibleCondition: () => true,
+      },
+    ],
+    otherActions: [],
+  };
   constructor(
     private renderer: Renderer2,
     private data: DataService,
@@ -112,9 +141,11 @@ export class ExamListComponent {
   ) {
     this.quizService.getList().subscribe((result) => {
       console.log(result);
-     this.tableData = result
-     console.log(this.tableData);
+      this.tableData = result;
+      console.log(this.tableData);
     });
+    this.quiz$ = this.quizService.getList().pipe(map((x) => x));
+    this.loading$ = this.quiz$.pipe(map((x) => x.length === 0));
   }
 
   public handleApplyClick = () => {
@@ -126,42 +157,7 @@ export class ExamListComponent {
       }
     }
   };
-  ngOnInit() {
-    this.starttime = [
-      { name: '09:30 AM', code: '1' },
-      { name: '10:30 AM', code: '2' },
-      { name: '11:30 AM', code: '3' },
-      { name: '12:30 PM', code: '3' },
-    ];
-    this.endtime = [
-      { name: '10:30 AM', code: '1' },
-      { name: '11:30 AM', code: '2' },
-      { name: '12:30 PM', code: '3' },
-      { name: '1:30 PM', code: '4' },
-    ];
-    this.type = [
-      { name: 'Select', code: '1' },
-      { name: 'Class', code: '2' },
-    ];
-    this.selectedType1 = this.type[1];
-    this.selectedStarttime1 = this.starttime[1];
-    this.selectedEndtime1 = this.endtime[1];
-  }
-  private getTableData(pageOption: pageSelection): void {
-    this.quizService.getList().subscribe((result) => {
-      this.tableData = result;
-      this.tableDataCopy = [];
-      this.serialNumberArray = [];
-     
-      this.pagination.calculatePageSize.next({
-        totalData: this.totalData,
-        pageSize: this.pageSize,
-        tableData: this.tableData,
-        tableDataCopy: this.tableDataCopy,
-        serialNumberArray: this.serialNumberArray,
-      });
-    });
-  }
+  ngOnInit() {}
 
   public sortData(sort: Sort) {
     const data = this.tableData.slice();
@@ -205,4 +201,15 @@ export class ExamListComponent {
   open() {
     this.dialog.open(QuizFormDialogComponent);
   }
+
+  addQuestions = () => {
+    this.dialog.open(QuestionsFormDialogComponent, {
+      minWidth: '95vw',
+      minHeight: '80vh',
+      disableClose: true,
+      data: {
+        id: 5,
+      },
+    });
+  };
 }
